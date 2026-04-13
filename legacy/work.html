@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | DreamSVin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .filter-tabs {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .filter-tab.active, .filter-tab:hover {
+            color: var(--gold);
+        }
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .case-card {
+            background: var(--surface);
+            padding: 40px;
+            border-left: 0.5px solid var(--border-color);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .case-card:hover {
+            border-left-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        .case-card .client-name {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .case-card .vertical-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            margin-bottom: 24px;
+        }
+        .case-card .metrics {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .metric-item {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--gold);
+        }
+        .metric-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+
+    <nav>
+        <div class="logo"><a href="index.html">DREAM<span class="s">S</span><span class="v">V</span>IN</a></div>
+        <div class="nav-links mono">
+            <a href="work.html" class="active">Work</a>
+            <a href="framework.html">Framework</a>
+            <a href="contact.html">Build</a>
+        </div>
+    </nav>
+
+    <main>
+        <section style="padding-top: 240px;">
+            <h1 class="bebas" style="font-size: 120px; margin-bottom: 60px;">Selected Cases</h1>
+            
+            <!-- Filters -->
+            <div class="filter-tabs mono">
+                <div class="filter-tab active" data-filter="all">ALL</div>
+                <div class="filter-tab" data-filter="event">EVENT IPs</div>
+                <div class="filter-tab" data-filter="brand">BRAND GROWTH</div>
+                <div class="filter-tab" data-filter="founder">FOUNDER CONSULTING</div>
+                <div class="filter-tab" data-filter="creator">CREATORS & COACHES</div>
+                <div class="filter-tab" data-filter="community">COMMUNITIES</div>
+            </div>
+
+            <!-- Grid -->
+            <div class="work-grid" id="work-grid">
+                <!-- Event IPs -->
+                <div class="case-card" data-category="event">
+                    <div class="vertical-pill">EVENT IP</div>
+                    <div class="client-name">OCEANMAN GOA</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Launch Phase</p>
+                    <p>After: Scaled to 600+ participants with partners like Taj Hotels & Evocus.</p>
+                    <div class="metrics">
+                        <div class="metric-item">600+<span class="metric-label">PARTICIPANTS</span></div>
+                        <div class="metric-item">TAJ<span class="metric-label">VENUE PARTNER</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="event">
+                    <div class="vertical-pill">EVENT IP</div>
+                    <div class="client-name">MUMBAI 10K</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Single Run</p>
+                    <p>After: 10,000+ participants, Red Bull & Fitbit partnerships, 200+ volunteers managed.</p>
+                    <div class="metrics">
+                        <div class="metric-item">10K+<span class="metric-label">PARTICIPANTS</span></div>
+                        <div class="metric-item">200+<span class="metric-label">VOLUNTEERS</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="brand">
+                    <div class="vertical-pill">BRAND GROWTH</div>
+                    <div class="client-name">EUREKA FORBES</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Legacy Blindspots</p>
+                    <p>After: 12+ digital gaps identified, ORA strategy implementation with Schbang.</p>
+                    <div class="metrics">
+                        <div class="metric-item">40YR<span class="metric-label">LEGACY</span></div>
+                        <div class="metric-item">12+<span class="metric-label">GAPS FIXED</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="brand">
+                    <div class="vertical-pill">BRAND GROWTH</div>
+                    <div class="client-name">SUPREME BHAGAR</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Offline Focus</p>
+                    <p>After: 25+ UGC creators, full digital overhaul, real-world engagement spikes.</p>
+                    <div class="metrics">
+                        <div class="metric-item">25+<span class="metric-label">UGC CREATORS</span></div>
+                        <div class="metric-item">100%<span class="metric-label">DIGITAL OVERHAUL</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="founder">
+                    <div class="vertical-pill">FOUNDER CONSULTING</div>
+                    <div class="client-name">PRUSTLR</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Product Only</p>
+                    <p>After: 3-month roadmap, content-to-revenue engine integration.</p>
+                    <div class="metrics">
+                        <div class="metric-item">3MO<span class="metric-label">ROADMAP</span></div>
+                        <div class="metric-item">C2R<span class="metric-label">STRATEGY</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="creator">
+                    <div class="vertical-pill">CREATORS & COACHES</div>
+                    <div class="client-name">MEHER ON MONEY</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Stagnant @ 184K</p>
+                    <p>After: 200K+ followers, compounding organic growth established.</p>
+                    <div class="metrics">
+                        <div class="metric-item">200K+<span class="metric-label">FOLLOWERS</span></div>
+                        <div class="metric-item">AUTO<span class="metric-label">COMPOUNDING</span></div>
+                    </div>
+                </div>
+
+                <div class="case-card" data-category="community">
+                    <div class="vertical-pill">COMMUNITY</div>
+                    <div class="client-name">REDEFINED</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: Mumbai Local</p>
+                    <p>After: Pan-India presence (Mumbai, Pune, Delhi, Bangalore).</p>
+                    <div class="metrics">
+                        <div class="metric-item">4<span class="metric-label">CITIES</span></div>
+                        <div class="metric-item">PLAYBOOK<span class="metric-label">EXECUTED</span></div>
+                    </div>
+                </div>
+                
+                <div class="case-card" data-category="creator">
+                    <div class="vertical-pill">CREATORS & COACHES</div>
+                    <div class="client-name">SACHIN THAKUR</div>
+                    <p class="mono" style="color: var(--muted); font-style: italic;">Before: English Coaching</p>
+                    <p>After: Storytelling Coach, 3x revenue growth, premium positioning.</p>
+                    <div class="metrics">
+                        <div class="metric-item">3X<span class="metric-label">REVENUE</span></div>
+                        <div class="metric-item">PREMIUM<span class="metric-label">REBRAND</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filter = tab.getAttribute('data-filter');
+                document.querySelectorAll('.case-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category').includes(filter)) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
