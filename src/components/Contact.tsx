@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function Contact() {
   return (
-    <section className="min-h-screen pt-40 flex flex-col items-center px-[8vw] pb-20">
+    <section className="min-h-screen pt-28 sm:pt-40 flex flex-col items-center px-6 sm:px-[8vw] pb-16 sm:pb-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -13,8 +13,8 @@ export default function Contact() {
       >
         <div className="space-y-6">
           <Logo size="custom" className="text-6xl md:text-8xl" />
-          <h2 className="font-display text-4xl md:text-5xl font-bold">Ready to build your <span className="text-accent">growth engine?</span></h2>
-          <p className="text-muted text-xl max-w-[600px] mx-auto leading-relaxed">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold">Ready to build your <span className="text-accent">growth engine?</span></h2>
+          <p className="text-muted text-base sm:text-xl max-w-[600px] mx-auto leading-relaxed">
             We're currently accepting 2 more partners for the next quarter. Tell us about your project.
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-surface/50 border border-white/5 p-8 md:p-12 rounded-[40px] space-y-8 text-left"
+          className="bg-surface/50 border border-white/5 p-7 sm:p-8 md:p-12 rounded-[32px] sm:rounded-[40px] space-y-6 sm:space-y-8 text-left"
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

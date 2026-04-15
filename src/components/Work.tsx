@@ -128,8 +128,8 @@ export default function Work() {
   const row2 = filteredCases.filter(c => c.row === 2 || activeFilter !== 'all');
 
   return (
-    <section className="pt-40 pb-20 overflow-hidden">
-      <div className="px-[8vw] mb-16">
+    <section className="pt-24 sm:pt-40 pb-16 sm:pb-20 overflow-hidden">
+      <div className="px-6 sm:px-[8vw] mb-10 sm:mb-16">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -137,15 +137,15 @@ export default function Work() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-8"
         >
           <div>
-            <h2 className="font-display text-[60px] md:text-[80px] font-bold leading-none mb-6">
+            <h2 className="font-display text-[40px] sm:text-[60px] md:text-[80px] font-bold leading-none mb-4 sm:mb-6">
               Selected <span className="text-accent">Cases</span>
             </h2>
-            <p className="text-muted text-lg max-w-[500px]">
-               We've helped 50+ brands and founders scale their impact through strategic content and infrastructure.
+            <p className="text-muted text-sm sm:text-lg max-w-[500px]">
+              We've helped 50+ brands and founders scale their impact through strategic content and infrastructure.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 md:gap-6 font-display text-[13px] font-semibold tracking-wide" id="work">
+          <div className="flex flex-wrap gap-3 sm:gap-6 font-display text-[11px] sm:text-[13px] font-semibold tracking-wide" id="work">
             {filters.map(filter => (
               <button
                 key={filter.id}
