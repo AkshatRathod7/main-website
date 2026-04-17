@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function Framework() {
   return (
-    <div className="pt-24 sm:pt-40 space-y-20 sm:space-y-32">
+    <div className="pt-20 sm:pt-40 space-y-16 sm:space-y-32">
       <section className="px-6 sm:px-[8vw]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,13 +64,13 @@ export default function Framework() {
         </div>
       </section>
 
-      <section className="py-24 sm:py-40 text-center relative overflow-hidden bg-surface/30">
+      <section className="py-20 sm:py-40 text-center relative overflow-hidden bg-surface/30">
         <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full translate-y-1/2"></div>
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-12 sm:mb-20 relative z-10 px-6"
+          className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-10 sm:mb-20 relative z-10 px-6"
         >
           Integration Engine
         </motion.h2>
@@ -79,18 +79,31 @@ export default function Framework() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="relative h-[280px] sm:h-[400px] w-full max-w-[320px] sm:max-w-[400px] mx-auto z-10 px-4"
+          className="relative w-full max-w-[340px] sm:max-w-[420px] mx-auto z-10 px-2"
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 text-accent font-display font-bold text-sm sm:text-xl">CONTENT</div>
-          <div className="absolute bottom-0 left-0 text-accent font-display font-bold text-sm sm:text-xl">COLLABORATION</div>
-          <div className="absolute bottom-0 right-0 text-accent font-display font-bold text-sm sm:text-xl">COMMUNITY</div>
-          <svg width="400" height="400" className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
-            <line x1="200" y1="50" x2="60" y2="340" stroke="currentColor" className="text-accent" strokeWidth="2" strokeDasharray="8 4" />
-            <line x1="200" y1="50" x2="340" y2="340" stroke="currentColor" className="text-accent" strokeWidth="2" strokeDasharray="8 4" />
-            <line x1="60" y1="340" x2="340" y2="340" stroke="currentColor" className="text-accent" strokeWidth="2" strokeDasharray="8 4" />
+          {/* Fully responsive SVG triangle — labels sit inside the viewBox */}
+          <svg
+            viewBox="0 0 400 420"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+          >
+            {/* glow */}
+            <circle cx="200" cy="220" r="60" fill="rgba(180,140,60,0.12)" filter="url(#blur)" />
+            <defs>
+              <filter id="blur"><feGaussianBlur stdDeviation="18" /></filter>
+            </defs>
+
+            {/* triangle lines */}
+            <line x1="200" y1="55" x2="55" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
+            <line x1="200" y1="55" x2="345" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
+            <line x1="55" y1="345" x2="345" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
+
+            {/* Labels */}
+            <text x="200" y="30" textAnchor="middle" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="20" fill="#c9a84c" letterSpacing="2">CONTENT</text>
+            <text x="200" y="225" textAnchor="middle" fontFamily="Outfit, sans-serif" fontWeight="900" fontSize="36" fill="white">DSV</text>
+            <text x="28" y="398" textAnchor="start" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="16" fill="#c9a84c" letterSpacing="1">COLLABORATION</text>
+            <text x="372" y="398" textAnchor="end" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="16" fill="#c9a84c" letterSpacing="1">COMMUNITY</text>
           </svg>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-accent/20 blur-2xl rounded-full"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-black text-3xl sm:text-4xl text-white">DSV</div>
         </motion.div>
       </section>
     </div>

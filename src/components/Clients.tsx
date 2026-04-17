@@ -28,8 +28,8 @@ const Row2Logos = [
 
 export default function Clients() {
   return (
-    <section className="py-24 bg-background overflow-hidden relative">
-      <div className="px-[8vw] mb-12">
+    <section className="py-20 sm:py-24 bg-background overflow-hidden relative">
+      <div className="px-6 sm:px-[8vw] mb-10 sm:mb-12">
         <motion.h2 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -77,7 +77,7 @@ function LogoRow({ logos, direction = "left" }: { logos: string[], direction?: "
             <img 
               src={`/logos/${logo}`} 
               alt="Logo" 
-              className="h-10 md:h-14 w-auto object-contain max-w-[200px]"
+              className="h-8 sm:h-10 md:h-14 w-auto object-contain max-w-[120px] sm:max-w-[200px]"
             />
           </div>
         ))}

@@ -128,16 +128,16 @@ export default function Work() {
   const row2 = filteredCases.filter(c => c.row === 2 || activeFilter !== 'all');
 
   return (
-    <section className="pt-24 sm:pt-40 pb-16 sm:pb-20 overflow-hidden">
-      <div className="px-6 sm:px-[8vw] mb-10 sm:mb-16">
+    <section className="pt-20 sm:pt-40 pb-16 sm:pb-20 overflow-hidden">
+      <div className="px-6 sm:px-[8vw] mb-8 sm:mb-16">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <h2 className="font-display text-[40px] sm:text-[60px] md:text-[80px] font-bold leading-none mb-4 sm:mb-6">
+            <h2 className="font-display text-[34px] sm:text-[60px] md:text-[80px] font-bold leading-none mb-3 sm:mb-6">
               Selected <span className="text-accent">Cases</span>
             </h2>
             <p className="text-muted text-sm sm:text-lg max-w-[500px]">
@@ -145,12 +145,17 @@ export default function Work() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 sm:gap-6 font-display text-[11px] sm:text-[13px] font-semibold tracking-wide" id="work">
+          {/* Scrollable filter row on mobile */}
+          <div
+            className="flex gap-5 sm:gap-6 font-display text-[11px] sm:text-[13px] font-semibold tracking-wide overflow-x-auto pb-1 scrollbar-none"
+            id="work"
+            style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
+          >
             {filters.map(filter => (
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`transition-all duration-300 ${
+                className={`flex-shrink-0 transition-all duration-300 ${
                   activeFilter === filter.id ? 'text-accent border-b-2 border-accent' : 'text-muted hover:text-foreground'
                 } pb-1`}
               >
@@ -204,7 +209,7 @@ function CaseCard({ item }: { item: typeof cases[0] }) {
   return (
     <motion.div 
       whileHover={{ scale: 0.98 }}
-      className="flex-shrink-0 w-[400px] group relative bg-surface/50 border border-white/5 rounded-3xl p-8 overflow-hidden hover:bg-surface transition-all duration-500 hover:border-accent/20 cursor-pointer"
+      className="flex-shrink-0 w-[300px] sm:w-[380px] group relative bg-surface/50 border border-white/5 rounded-3xl p-6 sm:p-8 overflow-hidden hover:bg-surface transition-all duration-500 hover:border-accent/20 cursor-pointer"
     >
       <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 blur-2xl rounded-full -mr-12 -mt-12 group-hover:bg-accent/10 transition-colors"></div>
       

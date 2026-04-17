@@ -25,3 +25,12 @@
 }
 
 /* Custom Cursor Placeholder - potentially add back via React context if needed */
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
