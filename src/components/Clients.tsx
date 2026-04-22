@@ -107,7 +107,7 @@ export default function Clients() {
           We work with India's{' '}
           <span className="text-gold">Top 0.1%</span>
           <br className="hidden sm:block" />
-          {' '}for their Social Media
+          {' '}for their Overall Growth
         </motion.h2>
 
         {/* Tab Switcher */}
