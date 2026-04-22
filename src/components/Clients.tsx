@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 
 // --- DATA ---
 
@@ -35,32 +35,63 @@ type TabType = 'brands' | 'personal';
 // --- LOGO ROW: single seamless marquee ---
 
 function LogoRow({ logos }: { logos: string[] }) {
-  // Double the list so we can seamlessly loop: translate from 0% → -50%
   const doubled = [...logos, ...logos];
-  const duration = logos.length * 4; // seconds per full pass
+  const duration = logos.length * 4;
+  const controls = useAnimationControls();
+
+  // Drag-to-scroll state
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const startAutoScroll = () =>
+    controls.start({ x: ['0%', '-50%'], transition: { duration, ease: 'linear', repeat: Infinity } });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.pageX;
+    if (containerRef.current) scrollLeft.current = containerRef.current.scrollLeft;
+    controls.stop();
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !containerRef.current) return;
+    const dx = e.pageX - startX.current;
+    containerRef.current.scrollLeft = scrollLeft.current - dx;
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    startAutoScroll();
+  };
 
   return (
-    <div className="flex overflow-hidden w-full">
+    <div
+      ref={containerRef}
+      className="overflow-x-auto scrollbar-none w-full"
+      style={{ cursor: isDragging.current ? 'grabbing' : 'grab', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={() => { isDragging.current = false; startAutoScroll(); }}
+      onMouseEnter={() => controls.stop()}
+    >
       <motion.div
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{
-          duration,
-          ease: 'linear',
-          repeat: Infinity,
-        }}
+        animate={controls}
+        initial={{ x: '0%' }}
+        onViewportEnter={() => startAutoScroll()}
         className="flex gap-6 items-center"
-        style={{ willChange: 'transform' }}
+        style={{ willChange: 'transform', width: 'max-content' }}
       >
         {doubled.map((logo, index) => (
-          <div
-            key={`${logo}-${index}`}
-            className="flex-shrink-0 group"
-          >
+          <div key={`${logo}-${index}`} className="flex-shrink-0 group">
             <div className="relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-3 sm:p-4 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-black/40">
               <img
                 src={`/logos/${logo}`}
                 alt={logo.replace(/\.(jpg|png)$/, '')}
                 className="h-14 sm:h-20 md:h-24 w-auto object-contain max-w-[140px] sm:max-w-[180px] md:max-w-[200px] grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                draggable={false}
               />
             </div>
           </div>
@@ -157,13 +188,21 @@ export default function Clients() {
         </motion.div>
       </AnimatePresence>
 
+      {/* Drag hint */}
+      <div className="text-center mt-5">
+        <span className="inline-flex items-center gap-2 text-muted/50 text-[11px] tracking-widest uppercase font-medium select-none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 9l-3 3 3 3"/><path d="M19 9l3 3-3 3"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          drag to explore
+        </span>
+      </div>
+
       {/* Footer count */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.4 }}
-        className="text-center mt-14 sm:mt-16"
+        className="text-center mt-8 sm:mt-10"
       >
         <span className="text-muted text-xs sm:text-sm tracking-widest uppercase font-medium">
           50+ Brands &amp; Creators and counting
