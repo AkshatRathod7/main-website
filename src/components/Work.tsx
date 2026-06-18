@@ -86,18 +86,6 @@ const cases = [
       { label: 'CITIES', value: '4' },
       { label: 'PLAYBOOK', value: 'DONE' }
     ]
-  },
-  {
-    category: 'creator',
-    title: 'SACHIN THAKUR',
-    logo: '/logos/coach sachin thakur.jpg',
-    pill: 'CREATORS & COACHES',
-    before: 'Before: English Coaching',
-    after: 'After: Storytelling Coach, 3x revenue growth, premium positioning.',
-    metrics: [
-      { label: 'REVENUE', value: '3X' },
-      { label: 'REBRAND', value: 'PREMIUM' }
-    ]
   }
 ];
 

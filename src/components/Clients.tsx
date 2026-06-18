@@ -22,7 +22,6 @@ const BrandLogos = [
 const PersonalBrandLogos = [
   'house of ekketa.jpg',
   'jainam.jpg',
-  'coach sachin thakur.jpg',
   'ironmankapil arora.jpg',
   'meheronmoney.jpg',
   'transformwithpurva.jpg',
