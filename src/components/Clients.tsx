@@ -106,8 +106,8 @@ export default function Clients() {
   const [activeTab, setActiveTab] = useState<TabType>('brands');
 
   const tabs: { id: TabType; label: string }[] = [
-    { id: 'brands', label: 'Brands' },
-    { id: 'personal', label: 'Personal Brands' },
+    { id: 'brands', label: 'Founder-Led Brands' },
+    { id: 'personal', label: 'Creators & Thought Leaders' },
   ];
 
   const logos = activeTab === 'brands' ? BrandLogos : PersonalBrandLogos;
@@ -134,10 +134,10 @@ export default function Clients() {
           transition={{ delay: 0.1 }}
           className="font-display text-2xl sm:text-4xl font-bold text-foreground mb-10"
         >
-          We work with India's{' '}
+          We partner with India's{' '}
           <span className="text-gold">Top 0.1%</span>
           <br className="hidden sm:block" />
-          {' '}for their Overall Growth
+          {' '}to build brands people remember
         </motion.h2>
 
         {/* Tab Switcher */}
@@ -204,7 +204,7 @@ export default function Clients() {
         className="text-center mt-8 sm:mt-10"
       >
         <span className="text-muted text-xs sm:text-sm tracking-widest uppercase font-medium">
-          50+ Brands &amp; Creators and counting
+          50+ founders and brands trust DreamSVin as their growth team
         </span>
       </motion.div>
     </section>

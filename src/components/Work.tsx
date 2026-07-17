@@ -8,8 +8,8 @@ const cases = [
     title: 'OCEANMAN GOA',
     logo: '/logos/ocean man.jpg',
     pill: 'EVENT IP',
-    before: 'Before: Launch Phase',
-    after: 'After: Scaled to 600+ participants with partners like Taj Hotels & Evocus.',
+    before: 'Before: A bold concept with no execution infrastructure, zero partnerships, no digital presence, and no scale plan.',
+    after: 'What Changed: DreamSVin built the execution engine, securing venue partnerships with Taj Hotels, aligning sponsors like Evocus, and scaling the event to 600+ participants.',
     metrics: [
       { label: 'PARTICIPANTS', value: '600+' },
       { label: 'VENUE PARTNER', value: 'TAJ' }
@@ -20,8 +20,8 @@ const cases = [
     title: 'MUMBAI 10K',
     logo: '/logos/mumbai 10k challenge.jpg',
     pill: 'EVENT IP',
-    before: 'Before: Single Run',
-    after: 'After: 10,000+ participants, Red Bull & Fitbit partnerships, 200+ volunteers managed.',
+    before: 'Before: A single community run with no infrastructure to grow beyond one edition.',
+    after: 'What Changed: DreamSVin executed end-to-end, securing Red Bull & Fitbit partnerships, coordinating 200+ volunteers, and building a repeatable system for 10,000+ participants.',
     metrics: [
       { label: 'PARTICIPANTS', value: '10K+' },
       { label: 'VOLUNTEERS', value: '200+' }
@@ -31,9 +31,9 @@ const cases = [
     category: 'brand',
     title: 'EUREKA FORBES',
     logo: '/logos/eurekaforbes.jpg',
-    pill: 'BRAND GROWTH',
-    before: 'Before: Legacy Blindspots',
-    after: 'After: 12+ digital gaps identified, ORA strategy implementation with Schbang.',
+    pill: 'BRAND POSITIONING',
+    before: 'Before: A 40-year legacy brand with digital blind spots that prevented them from seeing what was not working.',
+    after: 'What Changed: DreamSVin identified 12+ digital gaps, executed an ORA strategy with Schbang, and gave a heritage brand modern growth infrastructure.',
     metrics: [
       { label: 'LEGACY', value: '40YR' },
       { label: 'GAPS FIXED', value: '12+' }
@@ -43,9 +43,9 @@ const cases = [
     category: 'brand',
     title: 'SUPREME BHAGAR',
     logo: '/logos/supremm.jpg',
-    pill: 'BRAND GROWTH',
-    before: 'Before: Offline Focus',
-    after: 'After: 25+ UGC creators, full digital overhaul, real-world engagement spikes.',
+    pill: 'BRAND POSITIONING',
+    before: 'Before: Strong offline presence but invisible online, lacking a content system and digital strategy.',
+    after: 'What Changed: DreamSVin built a complete digital execution system, activating 25+ UGC creators, completing a full brand overhaul, and translating real-world engagement into online authority.',
     metrics: [
       { label: 'UGC CREATORS', value: '25+' },
       { label: 'DIGITAL OVERHAUL', value: '100%' }
@@ -55,21 +55,21 @@ const cases = [
     category: 'founder',
     title: 'PRUSTLR',
     logo: '/logos/prustlr.jpg',
-    pill: 'FOUNDER CONSULTING',
-    before: 'Before: Product Only',
-    after: 'After: 3-month roadmap, content-to-revenue engine integration.',
+    pill: 'FOUNDER GROWTH',
+    before: 'Before: A strong product with no system to turn it into revenue, meaning strategy existed only on paper.',
+    after: 'What Changed: DreamSVin built a 3-month execution roadmap and integrated a content-to-revenue engine that turned ideas into measurable outcomes.',
     metrics: [
       { label: 'ROADMAP', value: '3MO' },
-      { label: 'STRATEGY', value: 'C2R' }
+      { label: 'ENGINE', value: 'C2R' }
     ]
   },
   {
     category: 'creator',
     title: 'MEHER ON MONEY',
     logo: '/logos/meheronmoney.jpg',
-    pill: 'CREATORS & COACHES',
-    before: 'Before: Stagnant @ 184K',
-    after: 'After: 200K+ followers, compounding organic growth established.',
+    pill: 'CREATORS',
+    before: 'Before: Growth had flatlined at 184K, where posting more content was no longer moving the needle.',
+    after: 'What Changed: DreamSVin repositioned the content strategy and built a compounding organic system that broke through the plateau to 200K+ followers.',
     metrics: [
       { label: 'FOLLOWERS', value: '200K+' },
       { label: 'GROWTH', value: 'AUTO' }
@@ -80,8 +80,8 @@ const cases = [
     title: 'REDEFINED',
     logo: '/logos/redefined.png',
     pill: 'COMMUNITY',
-    before: 'Before: Mumbai Local',
-    after: 'After: Pan-India presence (Mumbai, Pune, Delhi, Bangalore).',
+    before: 'Before: A Mumbai-only community with no playbook to expand beyond one city.',
+    after: 'What Changed: DreamSVin built the community scaling playbook, enabling systematic expansion to Mumbai, Pune, Delhi, and Bangalore with a repeatable launch system.',
     metrics: [
       { label: 'CITIES', value: '4' },
       { label: 'PLAYBOOK', value: 'DONE' }
@@ -92,9 +92,9 @@ const cases = [
 const filters = [
   { id: 'all', label: 'ALL' },
   { id: 'event', label: 'EVENT IPs' },
-  { id: 'brand', label: 'BRAND GROWTH' },
-  { id: 'founder', label: 'FOUNDER CONSULTING' },
-  { id: 'creator', label: 'CREATORS & COACHES' },
+  { id: 'brand', label: 'BRAND POSITIONING' },
+  { id: 'founder', label: 'FOUNDER GROWTH' },
+  { id: 'creator', label: 'CREATORS' },
   { id: 'community', label: 'COMMUNITIES' }
 ];
 
@@ -128,10 +128,10 @@ export default function Work() {
         >
           <div>
             <h2 className="font-display text-[34px] sm:text-[60px] md:text-[80px] font-bold leading-none mb-3 sm:mb-6">
-              Selected <span className="text-accent">Cases</span>
+              Real <span className="text-accent">Impact</span>
             </h2>
             <p className="text-muted text-sm sm:text-lg max-w-[500px]">
-              We've helped 50+ brands and founders scale their impact through strategic content and infrastructure.
+              Every partnership starts with a problem worth solving. Here's what happened when founders stopped outsourcing and started executing.
             </p>
           </div>
 

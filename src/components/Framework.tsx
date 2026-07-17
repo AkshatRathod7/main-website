@@ -3,6 +3,38 @@ import { motion } from 'framer-motion';
 export default function Framework() {
   return (
     <div className="pt-20 sm:pt-40 space-y-16 sm:space-y-32">
+      {/* We Believe — Philosophy Section */}
+      <section className="py-20 sm:py-40 text-center relative overflow-hidden bg-surface/30">
+        <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full translate-y-1/2"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 px-6 sm:px-[8vw] max-w-[800px] mx-auto"
+        >
+          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-10 sm:mb-16">
+            We Believe
+          </h2>
+          <div className="space-y-6 sm:space-y-8">
+            <p className="font-display text-base sm:text-xl md:text-2xl text-muted leading-relaxed">
+              Most businesses don't struggle because they have bad products.
+              <br />
+              <span className="text-foreground font-semibold">They struggle because people don't remember them.</span>
+            </p>
+            <p className="font-display text-base sm:text-xl md:text-2xl text-muted leading-relaxed">
+              Great brands aren't built through more content.
+              <br />
+              <span className="text-foreground font-semibold">They're built through clear positioning, consistent execution, and meaningful relationships.</span>
+            </p>
+            <p className="font-display text-lg sm:text-2xl md:text-3xl text-gold font-bold mt-8 sm:mt-12">
+              That's what DreamSVin exists to build.
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* The DreamSVin Growth Engine — 5-Step Framework */}
       <section className="px-6 sm:px-[8vw]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -10,31 +42,45 @@ export default function Framework() {
           viewport={{ once: true }}
           className="text-center mb-14 sm:mb-24"
         >
-          <h2 className="font-display text-4xl sm:text-5xl md:text-8xl font-bold mb-4 sm:mb-6">The 3 Pillars</h2>
-          <p className="text-muted text-base sm:text-xl max-w-[600px] mx-auto">Our proven framework for engineering sustainable growth.</p>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-8xl font-bold mb-4 sm:mb-6">The DreamSVin Growth Engine</h2>
+          <p className="text-muted text-base sm:text-xl max-w-[600px] mx-auto">Our proprietary framework for building brands people remember.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
           {[
             {
               id: '01',
-              title: 'Content',
-              desc: "We don't build 'social media presence.' We build media infrastructure that works 24/7 to qualify leads.",
-              items: ['C2R Architecture', 'Short-form Distribution', 'Positioning Overhauls'],
+              title: 'Discover',
+              desc: 'Understand the founder, business, audience, and opportunity before making a single move.',
+              items: ['Founder & Business Audit', 'Market & Audience Analysis', 'Opportunity Mapping'],
               accent: 'bg-accent/10 text-accent'
             },
             {
               id: '02',
-              title: 'Collaboration',
-              desc: 'Borrowing trust is faster than building it. We align brands with high-integrity creators for a halo effect.',
-              items: ['Creator IP Strategy', 'Partnership Networking', 'B2B Ecosystems'],
+              title: 'Position',
+              desc: 'Create differentiation that people remember. Become the obvious choice in your category.',
+              items: ['Brand Positioning', 'Category Design', 'Messaging Architecture'],
               accent: 'bg-accent/10 text-accent'
             },
             {
               id: '03',
-              title: 'Community',
-              desc: 'The only way to win in a high-CAC world is to never lose a customer. Communities turn users into advocates.',
-              items: ['Ecosystem Design', 'Retention Systems', 'Founder-led Groups'],
+              title: 'Build',
+              desc: 'Develop systems, content, partnerships, and execution plans that create real business momentum.',
+              items: ['Content Systems', 'Partnership Development', 'Execution Playbooks'],
+              accent: 'bg-accent/10 text-accent'
+            },
+            {
+              id: '04',
+              title: 'Amplify',
+              desc: 'Increase visibility, authority, and trust through strategic distribution and thought leadership.',
+              items: ['Thought Leadership', 'Community Building', 'Strategic Distribution'],
+              accent: 'bg-accent/10 text-accent'
+            },
+            {
+              id: '05',
+              title: 'Scale',
+              desc: 'Repeat what works. Build sustainable growth systems that compound over time.',
+              items: ['Growth Systems', 'Revenue Architecture', 'Long-term Momentum'],
               accent: 'bg-accent/10 text-accent'
             }
           ].map((item, index) => (
@@ -62,49 +108,6 @@ export default function Framework() {
             </motion.div>
           ))}
         </div>
-      </section>
-
-      <section className="py-20 sm:py-40 text-center relative overflow-hidden bg-surface/30">
-        <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full translate-y-1/2"></div>
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-10 sm:mb-20 relative z-10 px-6"
-        >
-          Integration Engine
-        </motion.h2>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative w-full max-w-[340px] sm:max-w-[420px] mx-auto z-10 px-2"
-        >
-          {/* Fully responsive SVG triangle — labels sit inside the viewBox */}
-          <svg
-            viewBox="0 0 400 420"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
-          >
-            {/* glow */}
-            <circle cx="200" cy="220" r="60" fill="rgba(180,140,60,0.12)" filter="url(#blur)" />
-            <defs>
-              <filter id="blur"><feGaussianBlur stdDeviation="18" /></filter>
-            </defs>
-
-            {/* triangle lines */}
-            <line x1="200" y1="55" x2="55" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
-            <line x1="200" y1="55" x2="345" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
-            <line x1="55" y1="345" x2="345" y2="345" stroke="#b8860b" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" />
-
-            {/* Labels */}
-            <text x="200" y="30" textAnchor="middle" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="20" fill="#c9a84c" letterSpacing="2">CONTENT</text>
-            <text x="200" y="225" textAnchor="middle" fontFamily="Outfit, sans-serif" fontWeight="900" fontSize="36" fill="white">DSV</text>
-            <text x="28" y="398" textAnchor="start" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="16" fill="#c9a84c" letterSpacing="1">COLLABORATION</text>
-            <text x="372" y="398" textAnchor="end" fontFamily="Outfit, sans-serif" fontWeight="700" fontSize="16" fill="#c9a84c" letterSpacing="1">COMMUNITY</text>
-          </svg>
-        </motion.div>
       </section>
     </div>
   );

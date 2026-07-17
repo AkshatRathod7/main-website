@@ -3,8 +3,12 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Clients from "./components/Clients";
 import Work from "./components/Work";
+import WhoWeWorkWith from "./components/WhoWeWorkWith";
+import Founder from "./components/Founder";
 import Framework from "./components/Framework";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import Lenis from 'lenis';
 
 export default function App() {
@@ -34,13 +38,17 @@ export default function App() {
         <div id="work">
           <Work />
         </div>
+        <WhoWeWorkWith />
+        <Founder />
         <div id="framework">
           <Framework />
         </div>
+        <Testimonials />
         <div id="contact">
           <Contact />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
