@@ -66,10 +66,14 @@ export default function Contact() {
       setName("");
       setEmail("");
       setChallenge("");
-    } catch (err: any) {
+    } catch (err) {
       console.error("Supabase insert error:", err);
       setStatus("error");
-      setErrorMessage(err?.message || "Failed to submit your audit request. Please try again or reach out via email.");
+      const message =
+        typeof err === "object" && err !== null && "message" in err && typeof err.message === "string"
+          ? err.message
+          : "";
+      setErrorMessage(message || "Failed to submit your audit request. Please try again or reach out via email.");
     }
   };
 
