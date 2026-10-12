@@ -89,7 +89,7 @@ export default function Contact() {
         <div className="space-y-6">
           <Logo size="custom" className="text-6xl md:text-8xl" />
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold">Ready to Build a Brand <span className="text-accent">People Remember?</span></h2>
-          <p className="text-muted text-base sm:text-xl max-w-[600px] mx-auto leading-relaxed">
+          <p className="text-muted text-base sm:text-xl/7 max-w-[600px] mx-auto leading-relaxed">
             Book your complimentary Growth Audit. Walk away with actionable insights, even if we never work together.
           </p>
         </div>
@@ -130,7 +130,7 @@ export default function Contact() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   disabled={status === "submitting"}
-                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-none transition-all disabled:opacity-50"
+                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all disabled:opacity-50"
                 />
               </div>
               <div className="space-y-2">
@@ -142,7 +142,7 @@ export default function Contact() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={status === "submitting"}
-                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-none transition-all disabled:opacity-50"
+                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all disabled:opacity-50"
                 />
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function Contact() {
                 required
                 disabled={status === "submitting"}
                 rows={4}
-                className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-none transition-all resize-none disabled:opacity-50"
+                className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all resize-none disabled:opacity-50"
               />
             </div>
 

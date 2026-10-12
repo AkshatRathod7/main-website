@@ -30,13 +30,13 @@ export default function Founder() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Image Column */}
             <div className="lg:col-span-4 flex justify-center lg:justify-start">
-              <div className="relative group overflow-hidden rounded-2xl border border-white/10 max-w-[280px] sm:max-w-[320px] lg:max-w-none w-full aspect-[9/16] shadow-2xl">
+              <div className="relative group overflow-hidden rounded-2xl border border-white/10 max-w-[280px] sm:max-w-[320px] lg:max-w-none w-full aspect-9/16 shadow-2xl">
                 <img 
                   src="/isha.jpg" 
                   alt="Isha Vijay Ostwal at World Economic Forum" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
             </div>
 
@@ -53,7 +53,7 @@ export default function Founder() {
               </div>
 
               {/* The Narrative */}
-              <div className="space-y-6 sm:space-y-8 text-foreground/80 leading-relaxed text-sm sm:text-base md:text-lg">
+              <div className="space-y-6 sm:space-y-8 text-foreground/80 leading-relaxed text-sm sm:text-base/6 md:text-lg/7">
                 <p>
                   Most founders don't have a strategy problem. They have an execution problem. They know what needs to happen. They just don't have the team, the systems, or the bandwidth to make it happen consistently.
                 </p>
@@ -76,7 +76,7 @@ export default function Founder() {
 
               {/* Closing Statement */}
               <div className="pt-8 sm:pt-10 border-t border-white/5">
-                <p className="font-display text-base sm:text-xl md:text-2xl text-gold font-bold leading-relaxed">
+                <p className="font-display text-base sm:text-xl/7 md:text-2xl/8 text-gold font-bold leading-relaxed">
                   Whether you're building a company, a career, or an idea that matters, DreamSVin exists to help you move from potential to performance.
                 </p>
               </div>

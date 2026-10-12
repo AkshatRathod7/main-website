@@ -17,17 +17,17 @@ export default function Framework() {
             We Believe
           </h2>
           <div className="space-y-6 sm:space-y-8">
-            <p className="font-display text-base sm:text-xl md:text-2xl text-muted leading-relaxed">
+            <p className="font-display text-base sm:text-xl/7 md:text-2xl/8 text-muted leading-relaxed">
               Most businesses don't struggle because they have bad products.
               <br />
               <span className="text-foreground font-semibold">They struggle because people don't remember them.</span>
             </p>
-            <p className="font-display text-base sm:text-xl md:text-2xl text-muted leading-relaxed">
+            <p className="font-display text-base sm:text-xl/7 md:text-2xl/8 text-muted leading-relaxed">
               Great brands aren't built through more content.
               <br />
               <span className="text-foreground font-semibold">They're built through clear positioning, consistent execution, and meaningful relationships.</span>
             </p>
-            <p className="font-display text-lg sm:text-2xl md:text-3xl text-gold font-bold mt-8 sm:mt-12">
+            <p className="font-display text-lg sm:text-2xl md:text-3xl text-gold font-bold">
               That's what DreamSVin exists to build.
             </p>
           </div>
@@ -96,11 +96,11 @@ export default function Framework() {
                 {item.id}
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{item.title}</h3>
-              <p className="text-muted leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{item.desc}</p>
+              <p className="text-muted leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base/6">{item.desc}</p>
               <ul className="space-y-3">
                 {item.items.map(i => (
                   <li key={i} className="flex items-center gap-3 text-sm font-semibold">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent shrink-0"></div>
                     {i}
                   </li>
                 ))}

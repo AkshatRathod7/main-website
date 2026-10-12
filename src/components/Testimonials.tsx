@@ -51,7 +51,7 @@ export default function Testimonials() {
             className="bg-surface/50 border border-white/5 p-7 sm:p-10 rounded-[32px] sm:rounded-[40px] hover:border-accent/20 transition-all group"
           >
             <div className="text-accent text-3xl font-bold mb-4 leading-none">"</div>
-            <p className="text-foreground/80 leading-relaxed text-sm sm:text-base mb-6 sm:mb-8">
+            <p className="text-foreground/80 leading-relaxed text-sm sm:text-base/6 mb-6 sm:mb-8">
               {t.quote}
             </p>
             <div className="pt-6 border-t border-white/5">

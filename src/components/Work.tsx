@@ -145,7 +145,7 @@ export default function Work() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`flex-shrink-0 transition-all duration-300 pb-1 ${
+                className={`shrink-0 transition-all duration-300 pb-1 ${
                   activeFilter === filter.id
                     ? 'text-accent border-b-2 border-accent'
                     : 'text-muted hover:text-foreground'

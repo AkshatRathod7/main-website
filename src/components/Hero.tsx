@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-center items-center px-6 sm:px-[8vw] pt-28 sm:pt-40 pb-16 sm:pb-20 overflow-hidden text-center">
+    <section className="relative min-h-svh flex flex-col justify-center items-center px-6 sm:px-[8vw] pt-28 sm:pt-40 pb-16 sm:pb-20 overflow-hidden text-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,7 +25,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-[600px] mx-auto font-display text-base sm:text-xl md:text-2xl text-muted leading-relaxed mb-10 sm:mb-16 px-2"
+          className="max-w-[600px] mx-auto font-display text-base sm:text-xl/7 md:text-2xl/8 text-muted leading-relaxed mb-10 sm:mb-16 px-2"
         >
           We partner with founder-led brands to build positioning, content, communities, partnerships, and scalable growth systems that drive measurable business outcomes.
           <br /><br />

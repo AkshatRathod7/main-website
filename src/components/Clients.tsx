@@ -84,8 +84,8 @@ function LogoRow({ logos }: { logos: string[] }) {
         style={{ willChange: 'transform', width: 'max-content' }}
       >
         {doubled.map((logo, index) => (
-          <div key={`${logo}-${index}`} className="flex-shrink-0 group">
-            <div className="relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-3 sm:p-4 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-black/40">
+          <div key={`${logo}-${index}`} className="shrink-0 group">
+            <div className="relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xs p-3 sm:p-4 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-black/40">
               <img
                 src={`/logos/${logo}`}
                 alt={logo.replace(/\.(jpg|png)$/, '')}
@@ -146,13 +146,13 @@ export default function Clients() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-1 p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
+          className="inline-flex items-center gap-1 p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-xs"
         >
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className="relative px-6 sm:px-8 py-2.5 rounded-full text-sm sm:text-base font-semibold transition-colors duration-300 focus:outline-none"
+              className="relative px-6 sm:px-8 py-2.5 rounded-full text-sm sm:text-base font-semibold transition-colors duration-300 focus:outline-hidden"
               style={{ color: activeTab === tab.id ? '#000' : 'rgba(255,255,255,0.5)' }}
             >
               {activeTab === tab.id && (
@@ -180,8 +180,8 @@ export default function Clients() {
           className="relative"
         >
           {/* Gradient Masks */}
-          <div className="absolute inset-y-0 left-0 w-32 sm:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-32 sm:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-32 sm:w-48 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 sm:w-48 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <LogoRow logos={logos} />
         </motion.div>

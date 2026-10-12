@@ -51,7 +51,7 @@ export default function WhoWeWorkWith() {
             <ul className="space-y-4">
               {cat.people.map((person) => (
                 <li key={person} className="flex items-center gap-3 text-sm sm:text-base font-semibold text-foreground/80">
-                  <div className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-accent shrink-0"></div>
                   {person}
                 </li>
               ))}
