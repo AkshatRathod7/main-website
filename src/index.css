@@ -1,12 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  background-color: #080808;
-  color: #F5F2EC;
+@theme {
+  --color-background: #080808;
+  --color-foreground: #f5f2ec;
+
+  --color-gold: #c9a84c;
+  --color-gold-dim: #8a6e2f;
+
+  --color-accent: #c9a84c;
+  --color-surface: #141414;
+  --color-border: #1e1e1e;
+  --color-muted: #888880;
+
+  --font-display: Inter, system-ui, sans-serif;
+  --font-heading: Inter, system-ui, sans-serif;
+  --font-mono: JetBrains Mono, monospace;
+  --font-body: Inter, system-ui, sans-serif;
+  --font-logo: Inter, system-ui, sans-serif;
+
+  --tracking-tightest: -0.02em;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 40s linear infinite;
+  --animate-marquee-slow: marquee 80s linear infinite;
+  --animate-marquee-slow-reverse: marquee-reverse 80s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* v3 placeholder color (v4 defaults to 50% of the text color). */
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  /* v3 pointer cursor on buttons (v4 uses the browser default). */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  :root {
+    background-color: #080808;
+    color: #f5f2ec;
+  }
 }
 
 @layer base {
