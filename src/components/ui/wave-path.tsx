@@ -12,8 +12,10 @@ export function WavePath({ className, ...props }: WWavePathProps) {
 	let time = Math.PI / 2;
 	let reqId: number | null = null;
 
+	// Draw the initial flat curve once on mount.
 	useEffect(() => {
-		setPath(progress);
+		const width = window.innerWidth * 0.7;
+		path.current?.setAttributeNS(null, 'd', `M0 100 Q${width * 0.2} 100, ${width} 100`);
 	}, []);
 
 	const setPath = (progress: number) => {
