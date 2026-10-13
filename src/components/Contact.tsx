@@ -3,9 +3,22 @@ import Logo from "./Logo";
 import { motion } from 'framer-motion';
 import { submitLead } from "../lib/leads";
 
+const stages = [
+  "Starting or rebuilding",
+  "Growing an existing business",
+  "Preparing to scale or expand",
+  "Not sure yet",
+];
+
+const labelClass = "block font-display text-sm font-bold text-muted uppercase tracking-widest ml-1";
+const fieldClass = "w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all disabled:opacity-50";
+
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
+  const [phone, setPhone] = useState("");
+  const [stage, setStage] = useState("");
   const [challenge, setChallenge] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -17,11 +30,14 @@ export default function Contact() {
     setStatus("submitting");
 
     try {
-      await submitLead({ name, email, challenge, website });
+      await submitLead({ name, email, company, phone, stage, challenge, website });
 
       setStatus("success");
       setName("");
       setEmail("");
+      setCompany("");
+      setPhone("");
+      setStage("");
       setChallenge("");
     } catch (err) {
       console.error("Lead submit error:", err);
@@ -72,43 +88,87 @@ export default function Contact() {
             className="bg-surface/50 border border-white/5 p-7 sm:p-8 md:p-12 rounded-[32px] sm:rounded-[40px] space-y-6 sm:space-y-8 text-left"
             onSubmit={handleSubmit}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               <div className="space-y-2">
-                <label className="block font-display text-sm font-bold text-muted uppercase tracking-widest ml-1">Name</label>
+                <label htmlFor="lead-name" className={labelClass}>Name</label>
                 <input
+                  id="lead-name"
                   type="text"
                   placeholder="Your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
                   disabled={status === "submitting"}
-                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all disabled:opacity-50"
+                  className={fieldClass}
                 />
               </div>
               <div className="space-y-2">
-                <label className="block font-display text-sm font-bold text-muted uppercase tracking-widest ml-1">Email</label>
+                <label htmlFor="lead-email" className={labelClass}>Email</label>
                 <input
+                  id="lead-email"
                   type="email"
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={status === "submitting"}
-                  className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all disabled:opacity-50"
+                  className={fieldClass}
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="lead-company" className={labelClass}>Company <span className="normal-case tracking-normal font-medium">(optional)</span></label>
+                <input
+                  id="lead-company"
+                  type="text"
+                  placeholder="Business or institution"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  disabled={status === "submitting"}
+                  className={fieldClass}
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="lead-phone" className={labelClass}>Phone <span className="normal-case tracking-normal font-medium">(optional)</span></label>
+                <input
+                  id="lead-phone"
+                  type="tel"
+                  placeholder="+91"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  disabled={status === "submitting"}
+                  className={fieldClass}
                 />
               </div>
             </div>
 
+            <div className="space-y-2 relative">
+              <label htmlFor="lead-stage" className={labelClass}>Where is your business today?</label>
+              <svg className="absolute right-6 bottom-5 w-4 h-4 text-muted pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+              <select
+                id="lead-stage"
+                value={stage}
+                onChange={(e) => setStage(e.target.value)}
+                disabled={status === "submitting"}
+                className={`${fieldClass} appearance-none ${stage ? "" : "text-muted"}`}
+              >
+                <option value="">Select a stage (optional)</option>
+                {stages.map((option) => (
+                  <option key={option} value={option} className="text-foreground bg-background">{option}</option>
+                ))}
+              </select>
+            </div>
+
             <div className="space-y-2">
-              <label className="block font-display text-sm font-bold text-muted uppercase tracking-widest ml-1">Tell us about your business</label>
+              <label htmlFor="lead-challenge" className={labelClass}>Tell us about your business</label>
               <textarea
+                id="lead-challenge"
                 placeholder="What's the biggest growth challenge you're facing right now?"
                 value={challenge}
                 onChange={(e) => setChallenge(e.target.value)}
                 required
                 disabled={status === "submitting"}
                 rows={4}
-                className="w-full bg-background/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-accent outline-hidden transition-all resize-none disabled:opacity-50"
+                className={`${fieldClass} resize-none`}
               />
             </div>
 
