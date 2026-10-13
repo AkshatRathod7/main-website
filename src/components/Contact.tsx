@@ -1,79 +1,31 @@
 import React, { useState } from "react";
 import Logo from "./Logo";
 import { motion } from 'framer-motion';
-import { supabase } from "../lib/supabase";
+import { submitLead } from "../lib/leads";
 
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [challenge, setChallenge] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !challenge) return;
 
     setStatus("submitting");
-    setErrorMessage("");
 
     try {
-      // Step 1: Try inserting with 'challenge' column (matching new schema)
-      let { error } = await supabase
-        .from('leads')
-        .insert([
-          {
-            name,
-            email,
-            challenge,
-          }
-        ]);
-
-      // Step 2: If there's an error and it's a schema/column mismatch, fallback to 'message'
-      if (error && (error.message?.includes("column") || error.code === "PGRST204")) {
-        console.warn("Schema mismatch on 'challenge' column. Retrying with 'message' column...");
-        const retryResult = await supabase
-          .from('leads')
-          .insert([
-            {
-              name,
-              email,
-              message: challenge,
-            }
-          ]);
-        error = retryResult.error;
-      }
-
-      // Step 3: If that also fails, try with just name and email to preserve the lead
-      if (error && (error.message?.includes("column") || error.code === "PGRST204")) {
-        console.warn("Schema mismatch on 'message' column. Retrying with only name and email...");
-        const finalResult = await supabase
-          .from('leads')
-          .insert([
-            {
-              name,
-              email,
-            }
-          ]);
-        error = finalResult.error;
-      }
-
-      if (error) {
-        throw error;
-      }
+      await submitLead({ name, email, challenge, website });
 
       setStatus("success");
       setName("");
       setEmail("");
       setChallenge("");
     } catch (err) {
-      console.error("Supabase insert error:", err);
+      console.error("Lead submit error:", err);
       setStatus("error");
-      const message =
-        typeof err === "object" && err !== null && "message" in err && typeof err.message === "string"
-          ? err.message
-          : "";
-      setErrorMessage(message || "Failed to submit your audit request. Please try again or reach out via email.");
     }
   };
 
@@ -160,9 +112,21 @@ export default function Contact() {
               />
             </div>
 
+            {/* Honeypot: hidden from people, filled in by bots, rejected by the leads script */}
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-px w-px opacity-0"
+            />
+
             {status === "error" && (
               <p className="text-red-500 font-display text-sm font-semibold text-center">
-                {errorMessage}
+                Something went wrong sending your request. Please try again, or email us at grow@dreamsvin.com.
               </p>
             )}
 
