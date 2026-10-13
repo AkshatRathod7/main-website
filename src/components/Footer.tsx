@@ -6,10 +6,10 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto flex flex-col items-center text-center space-y-6">
         <Logo size="md" />
         <p className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground">
-          We Get Growth Done.
+          Your Business Architects. Your Growth Partners.
         </p>
         <p className="font-display text-sm sm:text-base text-muted font-semibold tracking-wide">
-          Execution Partners for Founder-Led Brands.
+          We help businesses build, grow and scale, with strategy and execution working together.
         </p>
         <div className="pt-6 flex flex-col sm:flex-row items-center gap-4 text-muted text-xs sm:text-sm font-display">
           <a href="mailto:grow@dreamsvin.com" className="text-accent hover:underline">grow@dreamsvin.com</a>

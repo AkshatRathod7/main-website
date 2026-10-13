@@ -2,16 +2,20 @@ import { motion } from 'framer-motion';
 
 const categories = [
   {
-    title: 'Founder-Led Wellness Brands',
-    people: ['Nutritionists', 'Fitness Coaches', 'Pilates & Yoga Studios', 'Health Experts'],
-  },
-  {
-    title: 'Creators & Thought Leaders',
-    people: ['Educators', 'Creator Businesses', 'Thought Leaders', 'Speakers'],
-  },
-  {
     title: 'Founders & Startups',
-    people: ['Early-Stage Startups', 'Service Businesses', 'D2C Brands', 'Professional Services'],
+    people: ['First-Time Founders', 'Early-Stage Startups', 'D2C Brands', 'Service Businesses'],
+  },
+  {
+    title: 'Established Businesses',
+    people: ['Founder-Led Companies', 'Family Businesses', 'Businesses Due for a Revamp', 'Wellness & Lifestyle Brands'],
+  },
+  {
+    title: 'Institutions',
+    people: ['Colleges & Universities', 'Schools & Education Groups', 'Associations', 'Non-Profits'],
+  },
+  {
+    title: 'Leaders & Experts',
+    people: ['CEOs & CXOs', 'Business Unit Heads', 'Creators & Educators', 'Thought Leaders & Speakers'],
   },
 ];
 
@@ -28,14 +32,14 @@ export default function WhoWeWorkWith() {
           Who We Partner With
         </p>
         <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6">
-          Your Growth Team
+          Built for Ambitious Businesses at Every Stage
         </h2>
-        <p className="text-muted text-base sm:text-xl max-w-[600px] mx-auto">
-          We don't work with everyone. We partner with founder-led brands and creators who are ready to execute.
+        <p className="text-muted text-base sm:text-xl max-w-[700px] mx-auto">
+          From a startup founder to a college owner or a CXO: we work with people who are ready to build, fix or grow something that matters, and ready to execute.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8">
         {categories.map((cat, index) => (
           <motion.div
             key={cat.title}

@@ -5,6 +5,9 @@ const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyONFSLfhBPxu7uR
 export interface Lead {
   name: string;
   email: string;
+  company: string;
+  phone: string;
+  stage: string;
   challenge: string;
   website: string; // honeypot, must stay empty
 }

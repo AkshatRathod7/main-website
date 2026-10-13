@@ -2,10 +2,16 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Clients from "./components/Clients";
+import Problem from "./components/Problem";
+import HowWeWork from "./components/HowWeWork";
+import Stages from "./components/Stages";
+import GrowthEngine from "./components/GrowthEngine";
+import Team from "./components/Team";
+import Capabilities from "./components/Capabilities";
 import Work from "./components/Work";
 import WhoWeWorkWith from "./components/WhoWeWorkWith";
+import WhyDreamSVin from "./components/WhyDreamSVin";
 import Founder from "./components/Founder";
-import Framework from "./components/Framework";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -21,7 +27,7 @@ export default function App() {
     }
 
     requestAnimationFrame(raf);
-    
+
     return () => {
       lenis.destroy();
     };
@@ -35,13 +41,23 @@ export default function App() {
           <Hero />
         </div>
         <Clients />
+        <Problem />
+        <div id="how">
+          <HowWeWork />
+        </div>
+        <div id="what">
+          <Stages />
+          <GrowthEngine />
+          <Team />
+          <Capabilities />
+        </div>
         <div id="work">
           <Work />
         </div>
         <WhoWeWorkWith />
-        <Founder />
-        <div id="framework">
-          <Framework />
+        <WhyDreamSVin />
+        <div id="about">
+          <Founder />
         </div>
         <Testimonials />
         <div id="contact">
