@@ -1,6 +1,6 @@
 // Google Apps Script web app that appends leads to the DreamSVin leads Google Sheet.
 // Source: google-apps-script/leads.gs. The URL is public by design, so it lives here, not in env vars.
-const LEADS_ENDPOINT = 'https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec';
+const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyONFSLfhBPxu7uRdVyDVeoOH26rCTb-OZZVCjNZ1_Krfy2gTANd-7QE0ZvfkgoNy0O1A/exec';
 
 export interface Lead {
   name: string;
