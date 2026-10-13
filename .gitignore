@@ -23,3 +23,6 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Local notes
+Website_perception_review.txt
