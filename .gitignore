@@ -24,6 +24,9 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# Claude Code local files (review notes, worktrees)
+.claude/
+
 # Local notes
 Website_perception_review.txt
 Website_revamp_pending.md
