@@ -36,7 +36,7 @@ export default function Testimonials() {
           From Our Partners
         </p>
         <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold">
-          What Founders Say
+          What Our Partners Say
         </h2>
       </motion.div>
 

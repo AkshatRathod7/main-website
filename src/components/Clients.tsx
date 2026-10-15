@@ -106,8 +106,8 @@ export default function Clients() {
   const [activeTab, setActiveTab] = useState<TabType>('brands');
 
   const tabs: { id: TabType; label: string }[] = [
-    { id: 'brands', label: 'Founder-Led Brands' },
-    { id: 'personal', label: 'Creators & Thought Leaders' },
+    { id: 'brands', label: 'Brands & Businesses' },
+    { id: 'personal', label: 'Founders & Leaders' },
   ];
 
   const logos = activeTab === 'brands' ? BrandLogos : PersonalBrandLogos;
@@ -134,10 +134,9 @@ export default function Clients() {
           transition={{ delay: 0.1 }}
           className="font-display text-2xl sm:text-4xl font-bold text-foreground mb-10"
         >
-          We partner with India's{' '}
-          <span className="text-gold">Top 0.1%</span>
+          Businesses, brands and leaders
           <br className="hidden sm:block" />
-          {' '}to build brands people remember
+          {' '}that chose to <span className="text-gold">build with us</span>
         </motion.h2>
 
         {/* Tab Switcher */}

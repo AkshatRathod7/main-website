@@ -127,18 +127,20 @@ export default function Work() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
+            <p className="font-display text-[11px] sm:text-[13px] font-bold tracking-[0.3em] text-muted uppercase mb-4">
+              Our Work
+            </p>
             <h2 className="font-display text-[34px] sm:text-[60px] md:text-[80px] font-bold leading-none mb-3 sm:mb-6">
-              Real <span className="text-accent">Impact</span>
+              Real Work.<br />Real <span className="text-accent">Impact.</span>
             </h2>
-            <p className="text-muted text-sm sm:text-lg max-w-[500px]">
-              Every partnership starts with a problem worth solving. Here's what happened when founders stopped outsourcing and started executing.
+            <p className="text-muted text-sm sm:text-lg max-w-[520px]">
+              Different businesses. Different challenges. Here's what changed when strategy met execution.
             </p>
           </div>
 
           {/* Filter row */}
           <div
             className="flex gap-5 sm:gap-6 font-display text-[11px] sm:text-[13px] font-semibold tracking-wide overflow-x-auto pb-1 scrollbar-none"
-            id="work"
             style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
           >
             {filters.map(filter => (

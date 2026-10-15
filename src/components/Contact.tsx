@@ -56,9 +56,9 @@ export default function Contact() {
       >
         <div className="space-y-6">
           <Logo size="custom" className="text-6xl md:text-8xl" />
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold">Ready to Build a Brand <span className="text-accent">People Remember?</span></h2>
-          <p className="text-muted text-base sm:text-xl/7 max-w-[600px] mx-auto leading-relaxed">
-            Book your complimentary Growth Audit. Walk away with actionable insights, even if we never work together.
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold">Let's Figure Out What's Next for <span className="text-accent">Your Business.</span></h2>
+          <p className="text-muted text-base sm:text-xl/7 max-w-[640px] mx-auto leading-relaxed">
+            Tell us what you're building, what isn't working or where you want to grow. We'll start by understanding your business and show you what the next 90 days could look like.
           </p>
         </div>
 
@@ -68,9 +68,9 @@ export default function Contact() {
             animate={{ opacity: 1, scale: 1 }}
             className="bg-surface/50 border border-gold/30 p-8 sm:p-12 rounded-[32px] sm:rounded-[40px] text-center space-y-4"
           >
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-accent">Audit Request Received</h3>
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-accent">Request Received</h3>
             <p className="text-foreground/80 text-sm sm:text-base max-w-[500px] mx-auto">
-              Thank you for applying. We will review your brand details and reach out within 24 hours to schedule your session.
+              Thank you. We'll review your details and reach out within 24 hours to set up a conversation.
             </p>
             <button
               onClick={() => setStatus("idle")}
@@ -162,7 +162,7 @@ export default function Contact() {
               <label htmlFor="lead-challenge" className={labelClass}>Tell us about your business</label>
               <textarea
                 id="lead-challenge"
-                placeholder="What's the biggest growth challenge you're facing right now?"
+                placeholder="What are you trying to achieve, and what's getting in the way?"
                 value={challenge}
                 onChange={(e) => setChallenge(e.target.value)}
                 required
@@ -195,7 +195,7 @@ export default function Contact() {
               disabled={status === "submitting"}
               className="w-full bg-accent text-white py-6 rounded-2xl font-display text-xl font-bold hover:scale-[0.99] transition-all active:scale-95 shadow-xl shadow-accent/20 disabled:opacity-50 disabled:hover:scale-100"
             >
-              {status === "submitting" ? "Submitting Request..." : "Book My Growth Audit"}
+              {status === "submitting" ? "Sending..." : "Book a Business Growth Consultation"}
             </button>
           </motion.form>
         )}

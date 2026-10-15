@@ -12,12 +12,24 @@ export default function Founder() {
         {/* Section Header */}
         <div className="text-center mb-14 sm:mb-20">
           <p className="font-display text-[11px] sm:text-[13px] font-bold tracking-[0.3em] text-muted uppercase mb-4">
-            The Story Behind DreamSVin
+            About DreamSVin
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6">
-            Why DreamSVin Exists
+          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-8 sm:mb-10">
+            We Don't Just Consult. <span className="text-accent">We Co-Build.</span>
           </h2>
+          <div className="max-w-[760px] mx-auto space-y-5 text-muted text-base sm:text-xl/8">
+            <p>
+              DreamSVin was built on a simple belief: businesses need more than good ideas and ambitious plans. They need people who can turn those plans into action.
+            </p>
+            <p>
+              We work with founders, companies and institutions to build strong foundations, transform what isn't working, unlock growth and create systems for scale. Every engagement starts with understanding the business, not with selling a predetermined service.
+            </p>
+          </div>
         </div>
+
+        <p className="font-display text-[11px] sm:text-[13px] font-bold tracking-[0.3em] text-muted uppercase mb-6 text-center">
+          Meet the Founder
+        </p>
 
         {/* Founder Story Card */}
         <motion.div
@@ -58,7 +70,7 @@ export default function Founder() {
                   Most founders don't have a strategy problem. They have an execution problem. They know what needs to happen. They just don't have the team, the systems, or the bandwidth to make it happen consistently.
                 </p>
                 <p>
-                  That's why DreamSVin was created. Not as another agency selling deliverables, but as an <span className="text-foreground font-semibold">execution partner</span> that embeds with founder-led brands and turns strategy into measurable outcomes.
+                  That's why DreamSVin was created. Not as another agency selling deliverables, but as an <span className="text-foreground font-semibold">execution partner</span> that embeds with businesses, founders and institutions and turns strategy into measurable outcomes.
                 </p>
                 <p>
                   Isha built DreamSVin from the belief that great businesses don't grow because they market more. They grow because they <span className="text-foreground font-semibold">execute better</span>. As Chief Everything Officer, she leads a team that doesn't just advise. It builds, ships, and scales alongside every partner.
