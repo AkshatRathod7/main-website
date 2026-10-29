@@ -22,7 +22,7 @@ const BrandLogos: Client[] = [
   { name: 'Here Comes The Bride', logo: 'hctb.jpg' },
   { name: 'Prustlr', logo: 'prustlr.jpg' },
   { name: 'Oceanman Goa', logo: 'ocean man.jpg' },
-  { name: 'SNJB' },
+  { name: 'SNJB', logo: 'snjb.jpg' },
   { name: 'Spectratix Pharma' },
   { name: 'Mengo' },
   { name: 'Yogsadhak' },
