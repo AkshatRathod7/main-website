@@ -3,37 +3,57 @@ import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 
 // --- DATA ---
 
-const BrandLogos = [
-  'analogy design.jpg',
-  'bandmaindia.jpg',
-  'culturecircle.jpg',
-  'estoquie.jpg',
-  'eurekaforbes.jpg',
-  'mumbai 10k challenge.jpg',
-  'redefined.png',
-  'rise global.jpg',
-  'supremm.jpg',
-  'pickle paloza.jpg',
-  'hctb.jpg',
-  'prustlr.jpg',
-  'ocean man.jpg',
+// Each client shows its logo from /public/logos when `logo` is set.
+// Clients without a logo file yet show as a name card in the same style.
+// To add a logo later: drop the file into public/logos and set `logo` to its filename.
+type Client = { name: string; logo?: string };
+
+const BrandLogos: Client[] = [
+  { name: 'Analogy Design', logo: 'analogy design.jpg' },
+  { name: 'Bandma', logo: 'bandmaindia.jpg' },
+  { name: 'Culture Circle', logo: 'culturecircle.jpg' },
+  { name: 'Estoquie', logo: 'estoquie.jpg' },
+  { name: 'Eureka Forbes', logo: 'eurekaforbes.jpg' },
+  { name: 'Mumbai 10K Challenge', logo: 'mumbai 10k challenge.jpg' },
+  { name: 'Redefined', logo: 'redefined.png' },
+  { name: 'Rise Global', logo: 'rise global.jpg' },
+  { name: 'Supremm Bhagar', logo: 'supremm.jpg' },
+  { name: 'Pickle Paloza', logo: 'pickle paloza.jpg' },
+  { name: 'Here Comes The Bride', logo: 'hctb.jpg' },
+  { name: 'Prustlr', logo: 'prustlr.jpg' },
+  { name: 'Oceanman Goa', logo: 'ocean man.jpg' },
+  { name: 'SNJB', logo: 'snjb.jpg' },
+  { name: 'Spectratix Pharma', logo: 'spectratix.jpg' },
+  { name: 'PharmaGyan Academy', logo: 'pharmagyan academy.jpg' },
+  { name: 'Mengo', logo: 'mengo.png' },
+  { name: 'Yogsadhak', logo: 'yogsadhak.jpg' },
+  { name: 'Audex', logo: 'audex.jpg' },
+  { name: 'Ekoham Holistic Wellness', logo: 'ekoham.jpg' },
+  { name: 'Entrelogy Business School', logo: 'entrelogy.jpg' },
+  { name: 'Resurgence', logo: 'resurgence.jpg' },
 ];
 
-const PersonalBrandLogos = [
-  'house of ekketa.jpg',
-  'jainam.jpg',
-  'ironmankapil arora.jpg',
-  'meheronmoney.jpg',
-  'transformwithpurva.jpg',
-  'willpowerstar.jpg',
-  'withlovehitay.jpg',
+const PersonalBrandLogos: Client[] = [
+  { name: 'House of Ekketa', logo: 'house of ekketa.jpg' },
+  { name: 'Jainam Jain', logo: 'jainam.jpg' },
+  { name: 'Ironman Kapil Arora', logo: 'ironmankapil arora.jpg' },
+  { name: 'Meher On Money', logo: 'meheronmoney.jpg' },
+  { name: 'Transform with Purva', logo: 'transformwithpurva.jpg' },
+  { name: 'Will Power Star', logo: 'willpowerstar.jpg' },
+  { name: 'With Love Hitay', logo: 'withlovehitay.jpg' },
+  { name: 'Dhaval Upendrakumar', logo: 'dhaval upendrakumar.jpg' },
+  { name: 'Karishma Rathod', logo: 'karishma rathod.jpg' },
+  { name: 'CA Priyanshi', logo: 'ca priyanshi.jpg' },
+  { name: 'Meghna Dharamsey', logo: 'meghna dharamsey.jpg' },
+  { name: 'Priya Jain', logo: 'priya jain.jpg' },
+  { name: "Chandni's Academy", logo: 'chandnis academy.jpg' },
 ];
 
 type TabType = 'brands' | 'personal';
 
 // --- LOGO ROW: single seamless marquee ---
 
-function LogoRow({ logos }: { logos: string[] }) {
+function LogoRow({ logos }: { logos: Client[] }) {
   const doubled = [...logos, ...logos];
   const duration = logos.length * 4;
   const controls = useAnimationControls();
@@ -83,15 +103,25 @@ function LogoRow({ logos }: { logos: string[] }) {
         className="flex gap-6 items-center"
         style={{ willChange: 'transform', width: 'max-content' }}
       >
-        {doubled.map((logo, index) => (
-          <div key={`${logo}-${index}`} className="shrink-0 group">
+        {doubled.map((client, index) => (
+          <div key={`${client.name}-${index}`} className="shrink-0 group">
             <div className="relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xs p-3 sm:p-4 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-black/40">
-              <img
-                src={`/logos/${logo}`}
-                alt={logo.replace(/\.(jpg|png)$/, '')}
-                className="h-14 sm:h-20 md:h-24 w-auto object-contain max-w-[140px] sm:max-w-[180px] md:max-w-[200px] grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                draggable={false}
-              />
+              {client.logo ? (
+                <img
+                  src={`/logos/${client.logo}`}
+                  alt={client.name}
+                  className="h-14 sm:h-20 md:h-24 w-auto object-contain max-w-[140px] sm:max-w-[180px] md:max-w-[200px] grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  draggable={false}
+                />
+              ) : (
+                <div
+                  role="img"
+                  aria-label={client.name}
+                  className="h-14 sm:h-20 md:h-24 w-20 sm:w-28 md:w-32 flex items-center justify-center px-1 text-center font-display font-bold uppercase tracking-[0.08em] leading-tight text-[8px] sm:text-[10px] md:text-xs break-words text-white/50 group-hover:text-white transition-colors duration-500 select-none"
+                >
+                  {client.name}
+                </div>
+              )}
             </div>
           </div>
         ))}
