@@ -23,13 +23,14 @@ const BrandLogos: Client[] = [
   { name: 'Prustlr', logo: 'prustlr.jpg' },
   { name: 'Oceanman Goa', logo: 'ocean man.jpg' },
   { name: 'SNJB', logo: 'snjb.jpg' },
-  { name: 'Spectratix Pharma' },
+  { name: 'Spectratix Pharma', logo: 'spectratix.jpg' },
+  { name: 'PharmaGyan Academy', logo: 'pharmagyan academy.jpg' },
   { name: 'Mengo', logo: 'mengo.png' },
-  { name: 'Yogsadhak' },
-  { name: 'Audex' },
-  { name: 'Ekoham Holistic Wellness' },
-  { name: 'Entrelogy Business School' },
-  { name: 'Resurgence' },
+  { name: 'Yogsadhak', logo: 'yogsadhak.jpg' },
+  { name: 'Audex', logo: 'audex.jpg' },
+  { name: 'Ekoham Holistic Wellness', logo: 'ekoham.jpg' },
+  { name: 'Entrelogy Business School', logo: 'entrelogy.jpg' },
+  { name: 'Resurgence', logo: 'resurgence.jpg' },
 ];
 
 const PersonalBrandLogos: Client[] = [
@@ -44,8 +45,8 @@ const PersonalBrandLogos: Client[] = [
   { name: 'Karishma Rathod' },
   { name: 'CA Priyanshi' },
   { name: 'Meghna Dharamsey', logo: 'meghna dharamsey.jpg' },
-  { name: 'Priya Jain' },
-  { name: 'Chandani Academy' },
+  { name: 'Priya Jain', logo: 'priya jain.jpg' },
+  { name: "Chandni's Academy", logo: 'chandnis academy.jpg' },
 ];
 
 type TabType = 'brands' | 'personal';
