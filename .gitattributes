@@ -1,7 +1,0 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-
-# Preserve execute permissions on scripts
-*.sh text eol=lf
-*.cjs text eol=lf
-*.mjs text eol=lf
