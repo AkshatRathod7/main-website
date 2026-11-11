@@ -3,36 +3,8 @@
    these rules only describe arrival, and are skipped under reduced motion. */
 
 /* Engagement plan: bars grow from the left, gates pop in, once */
-@media all {
-  [data-inview="false"] .plan-bar { transform: scaleX(0); }
-  [data-inview="false"] .plan-mark { opacity: 0; scale: 0.4; }
-  [data-inview="true"] .plan-bar {
-    transition: transform var(--dur-story) var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 120ms);
-  }
-  [data-inview="true"] .plan-mark {
-    transition: opacity var(--dur-slow) var(--ease-out), scale var(--dur-slow) var(--ease-out);
-    transition-delay: calc(500ms + var(--i, 0) * 50ms);
-  }
-}
-.plan-track {
-  /* faint weekly ticks on a 0–90 day scale, stronger at D30 and D60 */
-  background-image: repeating-linear-gradient(90deg, transparent 0 calc(100% / 90 * 7 - 1px), rgb(242 239 232 / 0.04) calc(100% / 90 * 7 - 1px) calc(100% / 90 * 7));
-}
-.plan-pos { left: calc(var(--d) / 90 * 100%); }
-.plan-span { left: calc(var(--s) / 90 * 100%); width: calc((var(--e) - var(--s)) / 90 * 100%); transform-origin: left; }
 
 /* Before / after frame */
-.ba-panel { transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility 0s linear 0s; }
-.ba-panel[data-active="false"] {
-  opacity: 0; transform: translateY(6px); visibility: hidden; pointer-events: none;
-  transition: opacity var(--dur-moderate) var(--ease-out), transform var(--dur-moderate) var(--ease-out), visibility 0s linear var(--dur-moderate);
-}
-.ba-thumb { transition: transform var(--dur-moderate) var(--ease-out); }
-[data-state="after"] .ba-thumb { transform: translateX(100%); }
+
 @keyframes ba-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.ba-timer { transform-origin: left; transform: scaleX(0); }
-[data-playing="true"] .ba-timer { animation: ba-timer var(--hold, 2400ms) linear both; }
-@media (prefers-reduced-motion: reduce) {
-  .ba-panel, .ba-panel[data-active="false"], .ba-thumb { transition: none; }
-}
+

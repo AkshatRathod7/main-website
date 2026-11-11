@@ -35,22 +35,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F9F5EF" },
-    { media: "(prefers-color-scheme: dark)", color: "#0D0E10" },
-  ],
+  themeColor: "#F9F5EF", // the default (light) theme; the page does not follow the device setting
   colorScheme: "light dark",
   viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" data-theme="dark" className={host.variable} suppressHydrationWarning>
+    <html lang="en-IN" data-theme="light" className={host.variable} suppressHydrationWarning>
       <head>
-        {/* Theme before first paint: the saved choice, else carbon dark. No flash. */}
+        {/* Theme before first paint: the saved choice, else light. No flash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("dsv-theme");if(t!=="light"&&t!=="dark")t="dark";document.documentElement.dataset.theme=t}catch(e){}`,
+            __html: `try{var t=localStorage.getItem("dsv-theme");if(t!=="light"&&t!=="dark")t="light";document.documentElement.dataset.theme=t}catch(e){}`,
           }}
         />
       </head>

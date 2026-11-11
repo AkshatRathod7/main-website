@@ -39,7 +39,7 @@ export const SECTORS: Sector[] = [
     key: "creators",
     name: "Creators & experts",
     line: "People with something to teach, finally heard.",
-    clients: ["Karishma Rathod", "Meher On Money", "CA Priyanshi Yadav", "Will Power Star"],
+    clients: ["Karishma Rathod", "Meher On Money", "CA Priyanshi Yadav", "Dhaval Upendrakumar", "Meghna Dharamsey", "Will Power Star"],
     proof: { v: "0 → 15K", k: "followers, from a standing start", who: "Karishma Rathod" },
   },
   {
@@ -60,14 +60,14 @@ export const SECTORS: Sector[] = [
     key: "events",
     name: "Sport & events",
     line: "Experiences people travel for.",
-    clients: ["Oceanman Goa", "Entrelogy Business School", "Will Power Star"],
+    clients: ["Oceanman Goa", "Mumbai 10K Challenge", "Entrelogy Business School", "Will Power Star", "Redefined"],
     proof: { v: "Taj", k: "among the sponsors brought to an open-water swim in Goa", who: "Oceanman Goa" },
   },
   {
     key: "consumer",
     name: "Consumer brands",
     line: "Products that deserve a shelf, and a feed.",
-    clients: ["Supremm Bhagar", "Prustlr", "Audex", "Spectratix Pharma"],
+    clients: ["Supremm Bhagar", "Prustlr", "Audex", "Spectratix Pharma", "Eureka Forbes", "Bandma"],
     proof: { v: "From zero", k: "pages grown from scratch, rebrands and a lead system that runs itself", who: "Supremm Bhagar · Audex" },
   },
 ];

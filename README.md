@@ -34,14 +34,14 @@ app/                 Routes
   fonts/             Host Grotesk, self-hosted
 components/
   brand/             Home page pieces: hero drawing, sprint, sector index, logo, chapter rail
-  home/              Sections merged onto the home page: services, FAQ, insights
+  home/              Home chapters: results, stage stack, services, growth engine, about, insights and questions, final call
   site/              Nav, footer, theme toggle, mobile call-to-action, analytics
   editorial/         Insights and legal page layout
   health-check/      Health check steps, form and results
   ui/                Buttons, headlines, accordion, toast, layout helpers
 content/             All copy: site.ts, cases.ts, services.ts, sectors.ts, insights/*.mdx
 lib/                 SEO, leads, rate limiting, share images, health check logic
-styles/              Section styles (brand, living, pages, editorial, health-check)
+styles/              Section styles (brand, living, home-a/b/c for the home chapters, pages, editorial, health-check)
 tokens/              Design tokens and the contrast table (reference)
 assets/og/           Fonts and wordmark used to draw share images
 public/              Logo files, client logos, Isha's photo
@@ -51,11 +51,13 @@ scripts/             check-todos.ts, build-client-logos.mjs
 
 **To change words, edit `content/`, not the pages.** `content/site.ts` holds the home page and shared copy, `content/cases.ts` the case studies and results, `content/services.ts` the five service pages.
 
+**To add a client logo:** run `node scripts/build-client-logos.mjs <folder> <slug>:<file>` to make a one-colour mark in `public/clients/`, then add it to `CLIENT_LOGOS` in `content/site.ts`. Clients without a logo show as their name.
+
 ## Pages
 
 | Route | What it is |
 |---|---|
-| `/` | The whole site in chapters: hero, results, what we do, services, growth engine, the 90-day sprint, work by industry, why us, founder, team, insights, questions, final call to action |
+| `/` | The whole site in ten chapters: hero, results, what we do (stacking stage cards), services, growth engine, the 90-day sprint, our work by industry, about, insights and questions, final call |
 | `/what-we-do/[slug]` | Five service pages |
 | `/work/[slug]` | Seven case studies |
 | `/insights`, `/insights/[slug]` | Articles, written as MDX in `content/insights/` |
@@ -67,7 +69,7 @@ scripts/             check-todos.ts, build-client-logos.mjs
 
 ## Look and behaviour
 
-- **Theme.** Carbon black is the default. The toggle in the nav switches to the light cream theme and remembers the choice (`localStorage` key `dsv-theme`). Colours are tokens in `app/globals.css`; dark overrides sit under `[data-theme="dark"]`.
+- **Theme.** Light cream is the default for every visitor. The toggle in the nav switches to carbon black and remembers the choice (`localStorage` key `dsv-theme`). Colours are tokens in `app/globals.css`; dark overrides sit under `[data-theme="dark"]`.
 - **Type.** One family, Host Grotesk, self-hosted. No third-party font request.
 - **Chapters.** `app/(site)/page.tsx` marks each chapter with `<SpyMark>`. The nav lights the chapter you are in, and the nav bar doubles as a progress bar.
 - **Fit and settle.** A chapter marked `fit` fills the screen under the nav and centres its content. On short desktop screens it scales down slightly so it still fits. When a scroll stops just short of a chapter, the page glides the rest of the way; it never pulls back against the scroll. Desktop only, and off for visitors who ask for reduced motion (`components/brand/spy.tsx`, `styles/living.css`).
@@ -99,4 +101,4 @@ These need Isha or the team:
 
 ## Earlier versions
 
-Git tags mark each saved stage. `v13-first-build-polished` is this version. The redesign explorations (`v4` to `v11`) live on the `premium-preview` branch and are not part of `main`.
+Git tags mark each saved stage. `v14-home-chapters` is this version. The redesign explorations (`v4` to `v11`) live on the `premium-preview` branch and are not part of `main`.
