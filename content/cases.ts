@@ -327,12 +327,25 @@ export const ROSTER: RosterEntry[] = [
  * as stated facts. Set `verified: false` on any figure a client hasn't cleared, and it drops out.
  */
 export const RESULTS = [
-  { v: 15, suffix: "K", prefix: "0 → ", k: "followers, from a standing start", who: "Karishma Rathod", verified: true },
-  { v: 10, suffix: "K", prefix: "", k: "followers in two weeks", who: "CA Priyanshi Yadav", verified: true },
-  { v: 169, suffix: "K", prefix: "", k: "views on one reel, from a dormant page", who: "Yogsadhak", verified: true },
-  { v: 7, suffix: "K", prefix: "2K → ", k: "organic followers", who: "Meghna Dharamsey", verified: true },
   { v: 100, suffix: "", prefix: "", k: "years of legacy, rebranded", who: "SNJB, est. 1928", verified: true },
+  { v: 169, suffix: "K", prefix: "", k: "views on one reel, from a dormant page", who: "Yogsadhak", verified: true },
+  { v: 10, suffix: "K", prefix: "", k: "followers in two weeks", who: "CA Priyanshi Yadav", verified: true },
+  { v: 7, suffix: "K", prefix: "2K → ", k: "organic followers", who: "Meghna Dharamsey", verified: true },
+  { v: 15, suffix: "K", prefix: "0 → ", k: "followers, from a standing start", who: "Karishma Rathod", verified: true },
 ] as const;
+
+/**
+ * The hero's proof card. A different set from the results strip on purpose (team feedback, 11 Nov: the same
+ * names kept coming up): Audex, ContIQ, SNJB, Dhaval and Prustlr. Only SNJB has a stated figure; the others
+ * show what was built, in words taken from their entries above (`n` is set only where there is a number).
+ */
+export const HERO_PROOF: { who: string; tag: string; big: string; n?: number; k: string }[] = [
+  { who: "SNJB", tag: "Education, est. 1928", big: "100", n: 100, k: "years of legacy, rebranded" },
+  { who: "Audex", tag: "Brand", big: "Rebrand", k: "end to end, with an automated lead generation system" },
+  { who: "ContIQ", tag: "AI platform for creators", big: "CCC", k: "a Content, Community and Collaborations plan" },
+  { who: "Dhaval Upendrakumar", tag: "Personal brand", big: "3C", k: "Content, Collaboration, Community: the full framework" },
+  { who: "Prustlr", tag: "Brand", big: "End to end", k: "brand and content strategy, reels and social media" },
+];
 
 export const SHOW_DRAFT_QUOTES = process.env.NEXT_PUBLIC_SHOW_DRAFT_QUOTES === "1";
 export const VISIBLE_RESULTS = RESULTS.filter((r) => r.verified || SHOW_DRAFT_QUOTES);

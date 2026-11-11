@@ -26,11 +26,11 @@ export type ResultItem = {
 /** The shape of each result in a 300×120 box, and where its marker sits: a climb from zero, a two-week jump,
  *  one reel spiking, a lift from an existing base, a long steady line that turns up. Illustrative, not data. */
 const SHAPES: { d: string; end: number; dot: [number, number] }[] = [
-  { d: "M0 114 C70 113 125 107 170 90 S250 30 294 10", end: 294, dot: [294, 10] },
-  { d: "M0 112 C90 111 130 107 158 86 S205 16 294 10", end: 294, dot: [294, 10] },
-  { d: "M0 110 C90 110 150 109 188 103 S216 8 236 8 S270 44 294 50", end: 294, dot: [236, 8] },
-  { d: "M0 88 C90 86 160 82 214 74 S270 36 294 14", end: 294, dot: [294, 14] },
   { d: "M0 98 C80 97 170 96 222 91 S272 54 294 22", end: 294, dot: [294, 22] },
+  { d: "M0 110 C90 110 150 109 188 103 S216 8 236 8 S270 44 294 50", end: 294, dot: [236, 8] },
+  { d: "M0 112 C90 111 130 107 158 86 S205 16 294 10", end: 294, dot: [294, 10] },
+  { d: "M0 88 C90 86 160 82 214 74 S270 36 294 14", end: 294, dot: [294, 14] },
+  { d: "M0 114 C70 113 125 107 170 90 S250 30 294 10", end: 294, dot: [294, 10] },
 ];
 
 const initials = (s: string) =>
