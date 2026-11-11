@@ -35,7 +35,15 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
   if (!item) notFound();
   const { meta } = item;
 
-  const { content } = await compileMDX({ source: item.content, components: mdxComponents, options: { parseFrontmatter: true } });
+  // blockJS defaults to true in next-mdx-remote 6: it strips `{...}` expressions,
+  // which our own MDX uses to pass props (e.g. <EscalationTimeline steps={[...]} />).
+  // The source is first-party content from content/insights, so JS is allowed here;
+  // blockDangerousJS stays on by default.
+  const { content } = await compileMDX({
+    source: item.content,
+    components: mdxComponents,
+    options: { parseFrontmatter: true, blockJS: false },
+  });
 
   const all = await getAllInsights();
   const next = all.find((a) => a.slug !== slug);
