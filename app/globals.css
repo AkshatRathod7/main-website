@@ -1,0 +1,434 @@
+/* DreamSVin — Brand Book 2026 · globals.css
+   Source: DreamSVin Brand Book (Oct 2026). Charcoal #25282D · Coral #FF705C · Gold #EFBC6F · Cream #F9F5EF · Grey #777777.
+   Host Grotesk for headings (medium) and body (regular), one family (7 Nov 2026).
+   The engineering (motion tokens, reveal system, reduced motion) is carried over from the Stage 10 build. */
+
+@import "tailwindcss";
+
+/* Crisper corners (7 Nov 2026): cards top out at 12px; pills stay round for buttons and tags. */
+@theme {
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+  --radius-3xl: 0.75rem;
+}
+@config "../tailwind.config.ts";
+@import "../styles/pages.css";
+@import "../styles/editorial.css";
+@import "../styles/health-check.css";
+@import "../styles/brand.css";
+@import "../styles/living.css";
+
+/* ───────────────────────── 1. Primitives ───────────────────────── */
+:root {
+  /* Brand book */
+  --c-charcoal: #25282d;
+  --c-coral: #ff705c;
+  --c-gold: #efbc6f;
+  --c-cream: #f9f5ef;
+  --c-grey: #777777;
+  --c-bronze: #9a6e37; /* the "SV" in the wordmark */
+
+  /* Derived, text-safe steps (contrast on cream in comments) */
+  --c-cream-2: #f3eee6; /* raised: the quiet alternate section */
+  --c-cream-3: #ebe3d6; /* overlay */
+  --c-paper: #ffffff; /* elevated card: white on cream, the Apple-style float */
+  --c-coral-tint: #ffeee9; /* coral at a whisper: Growth surfaces */
+  --c-gold-tint: #fbf1de; /* gold at a whisper */
+  --c-ink-muted: #4a4d53; /* 7.8:1 */
+  --c-ink-subtle: #5e6168; /* 5.7:1 */
+  --c-ink-faint: #8c8f95; /* 3.0:1 — disabled + decorative only */
+  --c-rust: #b03a26; /* coral's text-safe partner, 5.6:1 */
+  --c-coral-hover: #ff8473;
+  --c-coral-press: #f25f4a;
+  --c-line-cream: #e8e1d6;
+  --c-line-cream-strong: #d8cebf;
+  --c-line-cream-control: #777777; /* 4.1:1 */
+
+  --c-charcoal-2: #2c3036;
+  --c-charcoal-3: #353a41;
+  --c-charcoal-4: #3f444c;
+  --c-cream-muted: #d9d3c9;
+  --c-cream-subtle: #aeb0b5; /* 6.9:1 on charcoal */
+  --c-cream-faint: #6c7078;
+  --c-line-dark: #3a3e45;
+  --c-line-dark-strong: #4c5159;
+  --c-line-dark-control: #8a8d93;
+
+  --c-danger: #b03a26;
+  --c-success: #2f6b45;
+  --c-danger-light: #ff9a8a;
+  --c-success-light: #9cc8a8;
+
+  /* Legacy primitive names, kept so older components resolve onto brand values */
+  --c-canvas: var(--c-cream);
+  --c-surface-1: var(--c-cream-2);
+  --c-surface-2: var(--c-paper);
+  --c-surface-3: var(--c-cream-3);
+  --c-ivory: var(--c-cream);
+  --c-white: #ffffff;
+  --c-brass: var(--c-coral);
+  --c-brass-ink: var(--c-charcoal);
+  --c-ink: var(--c-charcoal);
+  --c-paper-2: var(--c-cream-2);
+
+  /* ───── 2. Semantic — cream tone (default) ───── */
+  --bg: var(--c-cream);
+  --bg-raised: var(--c-cream-2);
+  --bg-elevated: var(--c-paper);
+  --bg-overlay: var(--c-cream-3);
+  --fg: var(--c-charcoal);
+  --fg-muted: var(--c-ink-muted);
+  --fg-subtle: var(--c-ink-subtle);
+  --fg-faint: var(--c-ink-faint);
+  --fg-emphasis: #16181b;
+  --accent: var(--c-coral);
+  --accent-hover: var(--c-coral-hover);
+  --accent-press: var(--c-coral-press);
+  --on-accent: var(--c-charcoal);
+  --accent-text: var(--c-rust);
+  --highlight: var(--c-gold);
+  --line: var(--c-line-cream);
+  --line-strong: var(--c-line-cream-strong);
+  --line-control: var(--c-line-cream-control);
+  --focus: var(--c-charcoal);
+  --danger: var(--c-danger);
+  --success: var(--c-success);
+  --shadow-e1: 0 1px 2px 0 rgb(37 40 45 / 0.04);
+  --shadow-e2: 0 1px 2px 0 rgb(37 40 45 / 0.04), 0 8px 24px -12px rgb(37 40 45 / 0.10), 0 32px 64px -32px rgb(37 40 45 / 0.16);
+  --shadow-e3: 0 2px 6px 0 rgb(37 40 45 / 0.05), 0 20px 40px -20px rgb(37 40 45 / 0.16), 0 60px 120px -48px rgb(37 40 45 / 0.28);
+  /* Buttons: charcoal pills on light, cream pills on dark. Coral stays a signal colour. */
+  --btn-bg: var(--c-charcoal);
+  --btn-fg: var(--c-cream);
+  --btn-hover: #3a3e45;
+
+  /* ───── 3. Type (fluid 375 → 1440) ───── */
+  --font-display: var(--font-host), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-host), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-host), ui-sans-serif, system-ui, sans-serif; /* accent = italic of the same family */
+  --font-mono: var(--font-host), ui-sans-serif, system-ui, sans-serif; /* small labels, same family */
+  --text-display-2xl: clamp(3rem, 1.592rem + 6.009vw, 7rem);
+  --text-display-xl: clamp(2.75rem, 1.87rem + 3.756vw, 5.25rem);
+  --text-display-lg: clamp(2.25rem, 1.634rem + 2.629vw, 4rem);
+  --text-display-md: clamp(2rem, 1.56rem + 1.878vw, 3.25rem);
+  --text-heading-lg: clamp(1.625rem, 1.405rem + 0.939vw, 2.25rem);
+  --text-heading-md: clamp(1.3125rem, 1.202rem + 0.4695vw, 1.625rem);
+  --text-heading-sm: clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem);
+  --text-body-lg: clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem);
+  --text-body: clamp(1rem, 0.978rem + 0.0939vw, 1.0625rem);
+  --text-body-sm: clamp(0.875rem, 0.853rem + 0.0939vw, 0.9375rem);
+  --text-caption: clamp(0.75rem, 0.728rem + 0.0939vw, 0.8125rem);
+  --text-label: clamp(0.6875rem, 0.6655rem + 0.0939vw, 0.75rem);
+
+  /* ───── 4. Layout ───── */
+  --gutter: clamp(1.25rem, 0.6338rem + 2.629vw, 3rem);
+  --section-sm: clamp(3.5rem, 2.4rem + 4.6vw, 6.5rem);
+  --section: clamp(4.5rem, 3.2rem + 5.5vw, 8.5rem);
+  --section-lg: clamp(5.5rem, 3.8rem + 7.2vw, 10.5rem);
+  --nav-height: 72px;
+
+  /* ───── 5. Motion ───── */
+  --dur-instant: 100ms;
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-moderate: 250ms;
+  --dur-slow: 400ms;
+  --dur-slower: 550ms;
+  --dur-story: 700ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --stagger-line: 90ms;
+  --stagger-item: 60ms;
+  --reveal-y: 0.6em;
+  --enter-y: 16px;
+  --reveal-blur: 6px;
+
+  color-scheme: light;
+}
+
+/* Semantic — charcoal tone. <Section tone="ink">. The brand's dark moments. */
+[data-tone="ink"] {
+  --bg: var(--c-charcoal);
+  --bg-raised: var(--c-charcoal-2);
+  --bg-elevated: var(--c-charcoal-3);
+  --bg-overlay: var(--c-charcoal-4);
+  --fg: var(--c-cream);
+  --fg-muted: var(--c-cream-muted);
+  --fg-subtle: var(--c-cream-subtle);
+  --fg-faint: var(--c-cream-faint);
+  --fg-emphasis: #ffffff;
+  --accent-text: var(--c-coral); /* 5.4:1 on charcoal */
+  --btn-bg: var(--c-cream);
+  --btn-fg: var(--c-charcoal);
+  --btn-hover: #ffffff;
+  --line: var(--c-line-dark);
+  --line-strong: var(--c-line-dark-strong);
+  --line-control: var(--c-line-dark-control);
+  --focus: var(--c-coral);
+  --danger: var(--c-danger-light);
+  --success: var(--c-success-light);
+  --shadow-e1: inset 0 1px 0 0 rgb(255 255 255 / 0.04);
+  --shadow-e2: inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 12px 32px -16px rgb(0 0 0 / 0.5);
+  --shadow-e3: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 32px 64px -24px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* Dark theme (7 Nov 2026): the whole site in charcoal, same layout. Set on <html data-theme> by the
+   inline script in app/layout.tsx (saved choice, else the device setting) and the header toggle.
+   The page sits one step darker than the brand charcoal so the ink sections still read as their own moments. */
+:root[data-theme="dark"] {
+  /* Carbon black (10 Nov 2026, midnight): the default look. Near-black with a trace of warmth, so cream and coral sit on it cleanly. */
+  --bg: #0d0e10;
+  --bg-raised: #141518;
+  --bg-elevated: #1a1c1f;
+  --bg-overlay: #222428;
+  --fg: var(--c-cream);
+  --fg-muted: var(--c-cream-muted);
+  --fg-subtle: var(--c-cream-subtle);
+  --fg-faint: var(--c-cream-faint);
+  --fg-emphasis: #ffffff;
+  --accent-text: var(--c-coral);
+  --btn-bg: var(--c-cream);
+  --btn-fg: var(--c-charcoal);
+  --btn-hover: #ffffff;
+  --line: #25272b;
+  --line-strong: #383b41;
+  --line-control: var(--c-line-dark-control);
+  --focus: var(--c-coral);
+  --danger: var(--c-danger-light);
+  --success: var(--c-success-light);
+  --shadow-e1: inset 0 1px 0 0 rgb(255 255 255 / 0.04);
+  --shadow-e2: inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --shadow-e3: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 32px 64px -24px rgb(0 0 0 / 0.7);
+  color-scheme: dark;
+}
+:root[data-theme="dark"] [data-tone="paper"] {
+  --bg: #121316;
+  --bg-raised: #191b1e;
+  --bg-elevated: #191b1e;
+  --bg-overlay: #222428;
+}
+/* On carbon the ink sections sit one step up, not three: a quiet lift, never a grey slab. */
+:root[data-theme="dark"] [data-tone="ink"] {
+  --bg: #15171a;
+  --bg-raised: #1c1e22;
+  --bg-elevated: #23262b;
+  --bg-overlay: #2b2e34;
+  --line: #2a2d32;
+  --line-strong: #3d4047;
+}
+
+/* Semantic — paper tone: the warmer raised cream, for editorial pauses. */
+[data-tone="paper"] {
+  --bg: var(--c-cream-2);
+  --bg-raised: var(--c-paper);
+  --bg-elevated: var(--c-paper);
+  --bg-overlay: var(--c-cream-3);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* Reduced motion: reduced, not removed (client decision, 1 Nov). The site's motion is fades, colour,
+   line drawing, count-ups and a slow logo marquee, none of it parallax or zoom. Under "reduce" we keep it
+   and only shorten travel and turn off smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --reveal-y: 8px; --enter-y: 8px; --reveal-blur: 0px; }
+  html { scroll-behavior: auto !important; }
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    hanging-punctuation: first allow-end last;
+    font-feature-settings: "kern" 1, "cv11" 1;
+    scroll-padding-top: calc(var(--nav-height) + 24px);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    min-height: 100dvh;
+    font-size: var(--text-body);
+    line-height: 1.5;
+    background-color: var(--bg);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+    font-kerning: normal;
+  }
+  p, li, dd, figcaption, blockquote {
+    text-wrap: pretty;
+  }
+  em {
+    font-style: normal; /* Use <Accent> for the serif italic; plain em stays upright in body copy. */
+  }
+  ::selection {
+    background-color: var(--c-gold);
+    color: var(--c-charcoal);
+  }
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--line);
+  }
+  img, svg, video {
+    display: block;
+    max-width: 100%;
+  }
+  input, select, textarea, button {
+    font: inherit;
+    color: inherit;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* ───────────────────────── Utilities ───────────────────────── */
+@utility container-ds {
+  width: 100%;
+  max-width: calc(1360px + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Serif italic accent — ONE or two words per section. Instrument Serif sits small; +6% optical match. */
+@utility accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: -0.03em;
+  line-height: inherit;
+  color: var(--accent-text);
+}
+
+@utility label-mono {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+@utility numeric {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+@utility hairline-t {
+  border-top: 1px solid var(--line);
+}
+@utility hairline-b {
+  border-bottom: 1px solid var(--line);
+}
+
+/* Headline reveal: line-by-line, blur-to-sharp. JS adds data-inview="true". */
+@layer components {
+  .reveal-line {
+    display: block;
+    overflow: clip;
+    overflow-clip-margin: 0.2em; /* keeps descenders + serif swashes from clipping */
+    padding-block-end: 0.04em;
+  }
+  .reveal-line > span {
+    display: inline-block;
+    transform: translate3d(0, var(--reveal-y), 0);
+    opacity: 0;
+    filter: blur(var(--reveal-blur));
+    transition:
+      transform var(--dur-story) var(--ease-out),
+      opacity var(--dur-slower) var(--ease-out),
+      filter var(--dur-slower) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * var(--stagger-line));
+    will-change: transform, opacity;
+  }
+  /* reveal="load": starts at first paint, no JS. */
+  /* Stage 10: load reveals (page H1s = the LCP element) arrive by travel only — no opacity, no blur —
+     so the headline counts as painted, sharp, on the first frame. Scroll reveals keep blur-to-sharp. */
+  [data-reveal="load"] .reveal-line > span {
+    transition: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: ds-reveal-line-load var(--dur-story) var(--ease-out) both;
+    animation-delay: calc(120ms + var(--i, 0) * var(--stagger-line));
+  }
+  [data-inview="true"] .reveal-line > span {
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+  /* No JS → never hide content. */
+  @media (scripting: none) {
+    .reveal-line > span,
+    .enter {
+      transform: none;
+      opacity: 1;
+      filter: none;
+    }
+  }
+
+  @keyframes ds-reveal-line-load {
+    from {
+      transform: translate3d(0, var(--reveal-y), 0);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes ds-reveal-line {
+    from {
+      transform: translate3d(0, var(--reveal-y), 0);
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+    }
+    to {
+      transform: none;
+      opacity: 1;
+      filter: none;
+    }
+  }
+
+  /* Generic enter (cards, stats) */
+  .enter {
+    opacity: 0;
+    transform: translate3d(0, var(--enter-y), 0);
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * var(--stagger-item));
+  }
+  [data-inview="true"] .enter,
+  .enter[data-inview="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}

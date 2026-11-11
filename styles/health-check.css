@@ -1,0 +1,152 @@
+/*
+ * Health Check — the few styles Tailwind utilities can't express well.
+ * Stage 10: the provisional @theme block (canvas #0a0a0b, its own muted/faint greys) was removed;
+ * the route now uses the Stage 03 lock like every other page. Final build: colours come from the
+ * semantic tokens (--bg, --fg, --accent), so the instrument sits on the brand-book cream. Imported once from globals.css.
+ */
+
+
+.hc-root {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+  color-scheme: light;
+}
+
+.hc-root ::selection {
+  background: var(--highlight);
+  color: var(--fg);
+}
+
+.hc-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.hc-display {
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-wrap: balance;
+  font-weight: 500;
+}
+
+.hc-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.hc-tabular { font-variant-numeric: tabular-nums; }
+
+.hc-focus:focus-visible,
+.hc-root :is(a, button, input, [role="radio"], [role="checkbox"]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ── Screen transitions ───────────────────────────────────────────────── */
+
+@keyframes hc-in-fwd {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes hc-in-back {
+  from { opacity: 0; transform: translate3d(0, -16px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+/* Stage 10: travel only — the intro H1 is this route's LCP element and must paint, sharp, on frame one. */
+@keyframes hc-sharpen {
+  from { transform: translate3d(0, 10px, 0); }
+  to   { transform: none; }
+}
+@keyframes hc-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.hc-enter { animation: hc-in-fwd 560ms var(--ease-out) both; }
+.hc-enter[data-dir="back"] { animation-name: hc-in-back; }
+.hc-sharpen { animation: hc-sharpen 700ms var(--ease-out) both; }
+.hc-stagger > * { animation: hc-in-fwd 520ms var(--ease-out) both; }
+.hc-stagger > *:nth-child(1) { animation-delay: 90ms; }
+.hc-stagger > *:nth-child(2) { animation-delay: 130ms; }
+.hc-stagger > *:nth-child(3) { animation-delay: 170ms; }
+.hc-stagger > *:nth-child(4) { animation-delay: 210ms; }
+.hc-stagger > *:nth-child(5) { animation-delay: 250ms; }
+.hc-stagger > *:nth-child(6) { animation-delay: 290ms; }
+
+.hc-leaving {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0);
+  transition: opacity 160ms ease-in, transform 160ms ease-in;
+}
+.hc-leaving[data-dir="back"] { transform: translate3d(0, 8px, 0); }
+
+/* Answer rows */
+.hc-option {
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+.hc-option .hc-key {
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out),
+    border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+.hc-option:active .hc-key { transform: scale(0.94); }
+.hc-option[aria-checked="true"] .hc-key {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.hc-rule { transform: scaleX(0); transform-origin: left; }
+@keyframes hc-confirm {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+.hc-option[aria-checked="true"] .hc-rule {
+  animation: hc-confirm 420ms var(--ease-out) both;
+}
+
+/* Progress segments */
+.hc-seg { transition: background-color 400ms var(--ease-out), transform 400ms var(--ease-out); transform-origin: left; }
+
+/* Pillar-recorded pulse on a completed group */
+@keyframes hc-group-pulse {
+  0% { opacity: 1; }
+  30% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+.hc-group-done { animation: hc-group-pulse 900ms var(--ease-out); }
+
+/* Dial */
+.hc-dial-value {
+  transition: stroke-dashoffset 1600ms var(--ease-out);
+}
+.hc-dial-needle {
+  transform-box: view-box;
+  transform-origin: 220px 220px;
+  transition: transform 1600ms var(--ease-out);
+}
+.hc-bar-fill {
+  transform-origin: left;
+  transition: transform 1200ms var(--ease-out);
+}
+
+@keyframes hc-spin { to { transform: rotate(360deg); } }
+.hc-spinner { animation: hc-spin 900ms linear infinite; }
+
+/* Reduced motion: every state is designed to be correct without animation. */
+@media (prefers-reduced-motion: reduce) {
+  .hc-enter, .hc-sharpen, .hc-stagger > *, .hc-group-done,
+  .hc-option[aria-checked="true"] .hc-rule {
+    animation: hc-fade 1ms both !important;
+  }
+  .hc-option[aria-checked="true"] .hc-rule { transform: none; }
+  .hc-leaving { transition: none; }
+  .hc-dial-value, .hc-dial-needle, .hc-bar-fill, .hc-seg, .hc-option, .hc-option .hc-key { transition: none !important; }
+  .hc-spinner { animation-duration: 2.4s; }
+}

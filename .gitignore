@@ -1,32 +1,24 @@
-# Dependencies
+# dependencies
 node_modules
 
-# Build output
-dist
-dist-ssr
+# build output
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
 
-# Environment variables
-*.env
-.env
-.env.local
-.env.*.local
+# local settings and secrets (only the example is tracked)
+.env*
+!.env.example
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# hosting
+.vercel
 
-# Editor
-.vscode
-.idea
+# local review screenshots
+preview-shots
 
-# OS
+# OS and editor noise
 .DS_Store
-Thumbs.db
-
-# Claude Code local files (review notes, worktrees)
-.claude/
-
-# Local notes
-Website_perception_review.txt
-Website_revamp_pending.md
+*.log
+.idea
+.vscode
