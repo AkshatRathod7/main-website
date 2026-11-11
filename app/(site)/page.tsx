@@ -1,35 +1,29 @@
 // Home. Copy: DreamSVin Website Copy (24 Oct 2026), Homepage, block by block.
 // Order: hero → logos → results → stages → services → growth engine → 90-day sprint → work by industry
-//        → why us → founder → team → insights → questions → final CTA. Chapters marked `fit` fill the screen.
+//        → about (why us, founder, team) → insights and questions → final call. Chapters marked `fit` fill the screen.
 import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Headline } from "@/components/ui/headline";
-import { Reveal } from "@/components/brand/motion";
 import { HeroBlueprint } from "@/components/brand/blueprint";
 import { HeroProof } from "@/components/brand/living";
 import { Sprint } from "@/components/brand/sprint";
 import { SpyMark, SpyRail } from "@/components/brand/spy";
-import { HomeFaq, HomeInsights, HomeServices } from "@/components/home/merged";
-import { CaseRow, SectorIndex } from "@/components/brand/sector-index";
+import { HomeResults } from "@/components/home/results";
+import { HomeStageStack } from "@/components/home/stage-stack";
+import { HomeServicesIndex } from "@/components/home/services";
+import { OurWork } from "@/components/brand/sector-index";
+import { GrowthEngine } from "@/components/home/growth-engine";
 import { getAllInsights } from "@/lib/insights";
-import {
-  CccSection,
-  ExtendedTeam,
-  FinalCta,
-  FounderStrip,
-  Head,
-  Results,
-  StageStack,
-  TrustStrip,
-  WhyGrid,
-  quotesFrom,
-} from "@/components/brand/sections";
-import { FINAL_CTA, HERO, HOW_TEASER, PRIMARY_CTA, WHAT_TEASER } from "@/content/site";
+import { Head, TrustStrip, quotesFrom } from "@/components/brand/sections";
+import { FINAL_CTA, HERO, HOW_TEASER, PRIMARY_CTA } from "@/content/site";
 import { CASES } from "@/content/cases";
 import { JsonLd, homeGraph } from "@/lib/seo";
 import { FAQ_SCHEMA } from "@/components/home/faq-schema";
+import { HomeAbout } from "@/components/home/about";
+import { HomeInsightsFaq } from "@/components/home/insights-faq";
+import { FinalCall } from "@/components/home/final-call";
 
 export const metadata: Metadata = {
   title: { absolute: "DreamSVin: Your Business Architects. Your Growth Partners." },
@@ -83,22 +77,15 @@ export default async function HomePage() {
 
       <TrustStrip />
       <SpyMark label="Results" fit />
-      <Results quotes={quotesFrom(CASES)} />
+      <HomeResults quotes={quotesFrom(CASES)} />
 
-      {/* What we do: the stages, the five ways in, and the engine that drives growth */}
+      {/* What we do: the stages (a pinned deck on desktop), the five ways in, and the engine that drives growth */}
       <SpyMark label="What we do" id="what-we-do" nav />
-      <section aria-labelledby="what-h" className="py-section">
-        <div className="container-ds">
-          <Head id="what-h" kicker="What we do" index="02" lines={[WHAT_TEASER.title]} intro={WHAT_TEASER.intro} />
-          <div className="mt-14">
-            <StageStack />
-          </div>
-        </div>
-      </section>
+      <HomeStageStack />
       <SpyMark label="Services" fit />
-      <HomeServices />
+      <HomeServicesIndex />
       <SpyMark label="Growth engine" fit />
-      <CccSection />
+      <GrowthEngine />
 
       {/* How we work: the pinned 90-day sprint */}
       <SpyMark label="How we work" id="how-we-work" nav />
@@ -115,30 +102,21 @@ export default async function HomePage() {
             lines={["Eight industries.", "One way of growing."]}
             intro="Pick an industry to see who we grew there, and what changed."
           />
-          <div className="mt-14">
-            <SectorIndex />
-          </div>
-          <CaseRow />
+          <OurWork />
         </div>
       </section>
 
-      {/* About: why us, who you work with, the team around her */}
+      {/* About: why us, told by the person you work with; her line, the four reasons and the team in one screen */}
       <SpyMark label="About" id="about" nav fit />
-      <WhyGrid />
-      <SpyMark label="Founder" fit />
-      <FounderStrip />
-      <SpyMark label="One team" fit />
-      <ExtendedTeam />
+      <HomeAbout />
 
+      {/* Insights and questions: the essays on the left, the questions people ask on the right */}
       <SpyMark label="Insights" id="insights" nav fit />
-      <HomeInsights items={insights} />
+      <HomeInsightsFaq items={insights} />
 
-      {/* the questions people ask, last, just before the ask */}
-      <SpyMark label="Questions" fit />
-      <HomeFaq />
-
+      {/* the ask, and what happens after it */}
       <SpyMark label="Talk to us" fit />
-      <FinalCta title={FINAL_CTA.home.title} copy={FINAL_CTA.home.copy} secondary={FINAL_CTA.home.secondary} />
+      <FinalCall title={FINAL_CTA.home.title} copy={FINAL_CTA.home.copy} secondary={FINAL_CTA.home.secondary} />
       <SpyRail />
     </>
   );

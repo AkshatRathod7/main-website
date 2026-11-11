@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 /* Light / dark switch. The theme is set before first paint by the inline script in app/layout.tsx
-   (saved choice, else the device setting); this button only flips it and remembers the choice.
-   While no choice is saved, the page keeps following the device. */
+   (the saved choice, else light); this button flips it and remembers the choice. The page does not
+   follow the device setting: light is the default for everyone, carbon black is one click away. */
 type Theme = "light" | "dark";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
@@ -13,7 +13,6 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   useEffect(() => {
     const root = document.documentElement;
     setTheme(root.dataset.theme === "dark" ? "dark" : "light");
-    // Carbon black is the default for everyone (10 Nov 2026); only the toggle changes it, and the choice is saved.
   }, []);
 
   const flip = () => {

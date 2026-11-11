@@ -24,14 +24,14 @@ export const HERO = {
 
 export const TRUST = {
   label: "Trusted by colleges, startups, developers, financial firms and founder-led brands",
-  names: ["SNJB", "ContIQ", "Nagarsheth Group", "Resurgence Capital", "Ekoham", "Strongher After 40", "Priyanshi Yadav", "Oceanman Goa", "Spectratix Pharma", "Mengo", "Prustlr", "Entrelogy Business School", "Yogsadhak"],
+  names: ["SNJB", "ContIQ", "Nagarsheth Group", "Resurgence Capital", "Ekoham", "Audex", "Strongher After 40", "Supremm Bhagar", "Priyanshi Yadav", "Oceanman Goa", "Spectratix Pharma", "Mengo", "Karishma Rathod", "Prustlr", "Bandma", "Entrelogy Business School", "Yogsadhak", "Chandani Academy", "Eureka Forbes", "Redefined", "Culture Circle", "Here Comes The Bride"],
 } as const;
 
 /**
- * Client logos for the logo wall, made one-colour by scripts/build-client-logos.mjs from each client's own site
- * (researched 1 Nov 2026). Names without a logo here show as a wordmark in the display face.
- * Left out on purpose: Oceanman (the logo is the global series trademark, not the Goa event's), Audex (not
- * confirmed as the same company) and Bandma (only a low-resolution file, match not certain).
+ * Client logos, made one-colour by scripts/build-client-logos.mjs so they sit together as one set. The first
+ * eight came from each client's own site (1 Nov 2026); the rest from the logo files the DreamSVin team used on
+ * the previous site (11 Nov 2026). Names without a logo here show as a wordmark in the display face.
+ * Chandani Academy is spelled as in the testimonials doc; the logo itself reads "Chandni's Academy".
  * Showing a client's logo needs their permission, the same as naming them (README, before launch).
  */
 export const CLIENT_LOGOS: Record<string, { src: string; w: number; h: number }> = {
@@ -43,6 +43,36 @@ export const CLIENT_LOGOS: Record<string, { src: string; w: number; h: number }>
   Prustlr: { src: "/clients/prustlr.png", w: 840, h: 160 },
   "Entrelogy Business School": { src: "/clients/entrelogy.png", w: 855, h: 160 },
   Mengo: { src: "/clients/mengo.png", w: 569, h: 160 },
+  Audex: { src: "/clients/audex.png", w: 682, h: 160 },
+  Bandma: { src: "/clients/bandma.png", w: 280, h: 160 },
+  "Supremm Bhagar": { src: "/clients/supremm-bhagar.png", w: 282, h: 160 },
+  Yogsadhak: { src: "/clients/yogsadhak.png", w: 169, h: 160 },
+  "Karishma Rathod": { src: "/clients/karishma-rathod.png", w: 250, h: 160 },
+  "Chandani Academy": { src: "/clients/chandnis-academy.png", w: 543, h: 160 },
+  "Oceanman Goa": { src: "/clients/oceanman-goa.png", w: 340, h: 160 },
+  "Eureka Forbes": { src: "/clients/eureka-forbes.png", w: 698, h: 160 },
+  Redefined: { src: "/clients/redefined.png", w: 411, h: 160 },
+  "PharmaGyan Academy": { src: "/clients/pharmagyan-academy.png", w: 256, h: 160 },
+  "Culture Circle": { src: "/clients/culture-circle.png", w: 326, h: 160 },
+  "Analogy Design": { src: "/clients/analogy-design.png", w: 194, h: 160 },
+  "Here Comes The Bride": { src: "/clients/here-comes-the-bride.png", w: 546, h: 160 },
+  Estoquie: { src: "/clients/estoquie.png", w: 153, h: 160 },
+  "Rise Global": { src: "/clients/rise-global.png", w: 161, h: 160 },
+};
+
+/** Square headshots (240px) for clients who are people, from the photos used on the previous site. */
+export const CLIENT_PHOTOS: Record<string, string> = {
+  "Priyanshi Yadav": "/clients/people/priyanshi-yadav.jpg",
+  "CA Priyanshi Yadav": "/clients/people/priyanshi-yadav.jpg",
+  "Dhaval Upendrakumar": "/clients/people/dhaval-upendrakumar.jpg",
+  "Meghna Dharamsey": "/clients/people/meghna-dharamsey.jpg",
+  "Meher On Money": "/clients/people/meher-on-money.jpg",
+  "Will Power Star": "/clients/people/will-power-star.jpg",
+  "Jainam Jain": "/clients/people/jainam-jain.jpg",
+  "Ironman Kapil Arora": "/clients/people/ironman-kapil-arora.jpg",
+  "House of Ekketa": "/clients/people/house-of-ekketa.jpg",
+  "Transform with Purva": "/clients/people/transform-with-purva.jpg",
+  "With Love Hitay": "/clients/people/with-love-hitay.jpg",
 };
 
 export const PROBLEM = {

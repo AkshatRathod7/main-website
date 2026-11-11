@@ -1,0 +1,226 @@
+/* Home, middle chapters (11 Nov 2026).
+   .ge-*  the growth engine chapter (components/home/growth-engine.tsx), on top of the .pe-* drawing in living.css
+   .ow-*  our work, by industry (components/brand/sector-index.tsx)
+   Existing tokens only. Motion is transform and opacity; each block ends with its reduced-motion state. */
+
+/* ───────────────────────── Growth engine ───────────────────────── */
+.ge-rows { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.ge-row { position: relative; border-top: 1px solid var(--line); }
+.ge-btn {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 3px 20px; width: 100%; padding: 13px 0;
+  border: 0; background: none; color: inherit; text-align: left; cursor: pointer;
+  opacity: .78; transition: opacity .45s ease;
+}
+.ge-row[data-on] .ge-btn, .ge-btn:hover { opacity: 1; }
+.ge-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+.ge-name { font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: 700; line-height: 1.22; letter-spacing: -.022em; color: var(--fg); }
+.ge-desc { font-size: var(--text-body); line-height: 1.5; color: var(--fg-muted); }
+.ge-proof { display: flex; align-items: center; gap: 10px; margin-top: 4px; font-size: 14px; line-height: 1.35; color: var(--fg-muted); }
+.ge-who { font-weight: 600; color: var(--fg); }
+.ge-face { flex: none; width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.ge-logo { flex: none; display: grid; place-items: center; width: 28px; height: 28px; }
+.ge-logo img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; opacity: .85; }
+[data-theme="dark"] .ge-logo img { filter: grayscale(1) invert(1) brightness(1.15); }
+.ge-dot { flex: none; width: 6px; height: 6px; margin-inline: 11px; border-radius: 50%; background: var(--accent); }
+@media (min-width: 640px) {
+  .ge-btn { grid-template-columns: 11.5rem minmax(0, 1fr); align-items: baseline; }
+  .ge-name { grid-row: 1 / span 2; }
+  .ge-desc, .ge-proof { grid-column: 2; }
+}
+/* the lit row's marker: a thin coral line that fills while the cycle waits on this C */
+.ge-bar { position: absolute; left: 0; right: 0; top: -1px; height: 2px; overflow: hidden; pointer-events: none; }
+.ge-bar > span { position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; }
+.ge-bar > span[data-run] { animation: ge-timer var(--ge-step, 5200ms) linear both; }
+@keyframes ge-timer { from { transform: scaleX(0); } }
+
+/* the drawing: one orbit per C, the lit one in coral */
+.ge-orbit-base { fill: none; stroke: var(--line-strong); stroke-width: 1; }
+.ge-orbit-lit { fill: none; stroke: var(--c-coral); stroke-width: 1.5; opacity: 0; transition: opacity .6s ease; }
+.ge-orbit[data-on] .ge-orbit-lit { opacity: .85; }
+.ge-sat { transform-origin: 200px 248px; animation: ge-turn 40s linear infinite; }
+.ge-sat circle { fill: var(--c-coral); opacity: .3; transform-box: fill-box; transform-origin: center; transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
+.ge-orbit[data-on] .ge-sat circle { opacity: 1; transform: scale(1.5); }
+@keyframes ge-turn { to { transform: rotate(360deg); } }
+.ge-pe .pe-ring { stroke-width: 1; }
+.ge-route { opacity: .35; transition: opacity .5s ease; }
+.ge-route[data-on] { opacity: 1; }
+.ge-route[data-on] .pe-route { stroke: var(--c-coral); }
+.ge-card { scale: .97; transition: scale .6s cubic-bezier(.2, .8, .2, 1); cursor: default; }
+.ge-card[data-on] { scale: 1.04; z-index: 1; }
+.ge-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1.5px solid var(--c-coral); opacity: 0; transition: opacity .5s ease; pointer-events: none; }
+.ge-card[data-on]::after { opacity: .9; }
+[data-theme="dark"] .ge-pe .pe-card { box-shadow: 0 0 0 1px var(--line-strong); }
+
+/* small screens: the cards shrink so the core and the count stay clear of them */
+@media (max-width: 560px) {
+  .ge-pe .pe-card { padding: 9px 11px; border-radius: 14px; font-size: 12px; }
+  .ge-pe .pe-content { width: 48%; gap: 8px; }
+  .ge-pe .pe-reel { width: 32px; height: 48px; }
+  .ge-pe .pe-community { width: 42%; top: 9%; }
+  .ge-pe .pe-chat { height: 70px; gap: 4px; margin-top: 6px; }
+  .ge-pe .pe-chat li { padding: 3px 8px; font-size: 10.5px; line-height: 1.25; }
+  .ge-pe .pe-collab { left: 27%; width: 46%; }
+  .ge-pe .pe-meet { margin-top: 4px; }
+  .ge-pe .pe-you, .ge-pe .pe-them { width: 36px; height: 36px; font-size: 9.5px; }
+  .ge-pe .pe-count { top: 69%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ge-pe *, .ge-pe *::after, .ge-bar > span { animation: none !important; transition: none !important; }
+  .ge-btn { transition: none; }
+  .ge-pe .pe-ring { opacity: .3; }
+  .ge-pe .pe-chat li { opacity: 1; }
+  .ge-pe .pe-x { opacity: 1; }
+}
+
+/* ───────────────────────── Our work, by industry ───────────────────────── */
+.ow { margin-top: clamp(28px, 3.5vw, 48px); }
+
+/* the count line */
+.ow-count { list-style: none; margin: 0; padding: 18px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border-block: 1px solid var(--line); }
+.ow-count li { display: flex; flex-direction: column; gap: 4px; }
+.ow-count-n { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem); line-height: 1; letter-spacing: -.04em; color: var(--fg); }
+.ow-count-k { font-size: 15px; line-height: 1.3; color: var(--fg-muted); }
+@media (min-width: 640px) {
+  .ow-count { display: flex; flex-wrap: wrap; gap: 8px clamp(32px, 5vw, 80px); }
+  .ow-count li { flex-direction: row; align-items: baseline; gap: 10px; }
+}
+
+/* industries: wrapping chips on narrow screens (all eight in view), a ruled list on wide ones */
+
+/* the chosen industry */
+.ow-stage { min-width: 0; }
+
+@keyframes ow-in { from { opacity: 0; transform: translateY(12px); } }
+
+.ow-band { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: center; overflow: hidden; border-radius: 16px; background: var(--c-charcoal); color: var(--c-cream); padding: clamp(20px, 2.4vw, 32px); }
+.ow-band::before { content: ""; position: absolute; inset: -60% -15% auto auto; width: 60%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(255 112 92 / .2), transparent 65%); pointer-events: none; }
+.ow-band[data-sector="education"]::before, .ow-band[data-sector="finance"]::before, .ow-band[data-sector="realestate"]::before { background: radial-gradient(circle, rgb(239 188 111 / .2), transparent 65%); }
+[data-theme="dark"] .ow-band { background: var(--bg-raised); box-shadow: inset 0 0 0 1px var(--line); }
+.ow-art { position: relative; width: 100%; max-width: 230px; margin-inline: auto; color: rgb(249 245 239 / .78); }
+.ow-art .sa { --sa-acc: var(--c-coral); }
+.ow-band-copy { position: relative; min-width: 0; }
+.ow-kicker { margin: 0; font: 600 13px/1.3 var(--font-sans); color: var(--c-gold); }
+.ow-kicker-meta { font-weight: 500; color: rgb(249 245 239 / .7); }
+.ow-line { margin: 8px 0 0; max-width: 24ch; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 1rem + 1.1vw, 1.9rem); line-height: 1.1; letter-spacing: -.03em; }
+.ow-proof { margin: 16px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.ow-v { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 1.3rem + 2vw, 3rem); line-height: .95; letter-spacing: -.05em; white-space: nowrap; background: linear-gradient(90deg, #ffb08f, var(--c-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ow-k { flex: 1 1 16ch; max-width: 36ch; font-size: 15px; line-height: 1.4; color: rgb(249 245 239 / .88); }
+.ow-proof-who { color: rgb(249 245 239 / .68); }
+@media (min-width: 640px) {
+  .ow-band { grid-template-columns: minmax(0, 230px) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); }
+}
+
+/* its clients */
+
+.ow-logo { display: block; max-width: 100%; max-height: 30px; width: auto; height: auto; opacity: .85; }
+[data-theme="dark"] .ow-logo { filter: grayscale(1) invert(1) brightness(1.15); }
+.ow-face { display: block; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.ow-mono { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line-strong); font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--fg-muted); }
+
+@media (min-width: 768px) {
+  
+  
+  
+  
+  
+  .ow-logo { max-height: 34px; }
+  
+  
+  
+}
+
+/* also worked with: a quiet row */
+
+@media (prefers-reduced-motion: reduce) {
+  
+  
+  .ow-art .sa * { animation: none !important; }
+  .ow-art .sa .d, .ow-art .sa .dash { stroke-dashoffset: 0; opacity: 1; }
+  .ow-art .sa .rise, .ow-art .sa .pop, .ow-art .sa .breathe { transform: none; }
+  .ow-art .sa .fade { opacity: 1; }
+  .ow-art .sa .win { opacity: .6; }
+}
+
+/* Push or pull (growth engine), played with the words: the word that loses is shoved away, the one that wins is
+   hauled in. Pull wins by default; tapping "push" runs the drawing backwards (rules below). */
+.pp { margin-top: 28px; }
+.pp-line { margin: 0; }
+.pp-w { display: inline-block; padding: 0; border: 0; background: none; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; }
+.pp-w:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 4px; }
+.pp-w > span { display: inline-block; transform-origin: 50% 80%; }
+.pp[data-on][data-mode="pull"] .pp-push > span, .pp[data-on][data-mode="push"] .pp-pull > span { animation: pp-shove 900ms cubic-bezier(.3, 0, .2, 1) 250ms both; }
+.pp[data-on][data-mode="pull"] .pp-pull > span, .pp[data-on][data-mode="push"] .pp-push > span { animation: pp-haul 1000ms cubic-bezier(.2, 1.5, .3, 1) 750ms both; color: var(--accent-text); }
+@keyframes pp-shove {
+  0% { transform: none; opacity: 1; }
+  30% { transform: translateX(-.06em) scale(1.04); }
+  100% { transform: translate(.22em, -.34em) rotate(-9deg) scale(.8); opacity: .36; text-decoration: line-through; text-decoration-color: var(--c-coral); text-decoration-thickness: 2px; }
+}
+.pp[data-on][data-mode="push"] .pp-pull > span { animation-name: pp-shove-out; }
+@keyframes pp-shove-out {
+  0% { transform: none; opacity: 1; }
+  30% { transform: translateX(-.08em) scale(1.04); }
+  100% { transform: translate(.7em, .05em) rotate(8deg) scale(.8); opacity: .36; text-decoration: line-through; text-decoration-color: var(--c-coral); text-decoration-thickness: 2px; }
+}
+@keyframes pp-haul { 0% { transform: translateX(1.1em) scale(.82); opacity: 0; } 60% { opacity: 1; } 100% { transform: none; opacity: 1; } }
+.pp-w:hover > span { filter: brightness(1.15); }
+.pp-say { margin: 10px 0 0; font-size: 14px; color: var(--fg-muted); }
+@media (prefers-reduced-motion: reduce) {
+  .pp .pp-w > span { animation: none !important; }
+  .pp[data-mode="pull"] .pp-push > span, .pp[data-mode="push"] .pp-pull > span { opacity: .4; text-decoration: line-through; text-decoration-color: var(--c-coral); }
+}
+.pe[data-mode="push"] .pe-p, .pe[data-mode="push"] .pe-count { opacity: 0 !important; visibility: hidden; }
+.pe[data-mode="push"] .pe-ring { animation-direction: reverse; stroke: var(--fg-subtle); }
+.pe[data-mode="push"] .pe-core { filter: grayscale(1) opacity(.55); animation-play-state: paused; }
+.pe .pe-card { transition: translate .7s cubic-bezier(.2, .8, .2, 1), opacity .5s; }
+.pe[data-mode="push"] .pe-card { opacity: .45; }
+.pe[data-mode="push"] .pe-content { translate: -14px -16px; }
+.pe[data-mode="push"] .pe-community { translate: 16px -12px; }
+.pe[data-mode="push"] .pe-collab { translate: 0 18px; }
+@media (prefers-reduced-motion: reduce) { .pe .pe-card { transition: none; } }
+
+/* Our work, decluttered: count line, one row of industry tabs, the band, then client tiles beside one detail panel. */
+.owx-tabs { list-style: none; margin: clamp(20px, 2.5vw, 32px) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.owx-tab { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 999px;
+  background: none; color: var(--fg-muted); font: 500 15px/1 var(--font-sans), sans-serif; cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+.owx-tab:hover { color: var(--fg); border-color: var(--fg); }
+.owx-tab[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.owx-tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.owx-tab-n { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .6; }
+.owx-stage { margin-top: 16px; min-width: 0; }
+.owx-stage-in { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; animation: ow-in .6s cubic-bezier(.2, .8, .2, 1) both; }
+.owx-band .ow-art { max-width: 170px; }
+.owx-work { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+.owx-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.owx-tiles li { animation: ow-in .5s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i, 0) * 50ms + 120ms); }
+.owx-tile { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 12px; width: 100%; min-height: 72px; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 14px; background: var(--bg-raised); color: var(--fg); text-align: left; cursor: pointer; transition: border-color .25s, background-color .25s; }
+.owx-tile:hover { border-color: var(--line-strong); }
+.owx-tile[aria-pressed="true"] { border-color: var(--accent); background: var(--bg-elevated); }
+.owx-tile:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.owx-mark { display: grid; place-items: center; width: 48px; height: 44px; }
+.owx-mark .ow-logo { max-height: 32px; max-width: 48px; }
+.owx-name { font-family: var(--font-display); font-weight: 500; font-size: 16px; line-height: 1.15; letter-spacing: -.02em; }
+.owx-flag { grid-column: 2; margin-top: -6px; font-size: 12px; font-weight: 600; color: var(--accent-text); }
+.owx-detail { border: 1px solid var(--line); border-radius: 16px; background: var(--bg-raised); padding: clamp(20px, 2.4vw, 32px); }
+.owx-detail-in { animation: ow-in .45s cubic-bezier(.2, .8, .2, 1) both; }
+.owx-cat { margin: 0; font-size: 13px; font-weight: 600; color: var(--accent-text); }
+.owx-who { margin: 6px 0 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem); line-height: 1.05; letter-spacing: -.03em; color: var(--fg); }
+.owx-result { margin: 12px 0 0; padding-left: 12px; border-left: 2px solid var(--accent); font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--fg); }
+.owx-did-h { margin: 20px 0 0; font-size: 13px; font-weight: 600; color: var(--fg-muted); }
+.owx-did { list-style: none; margin: 8px 0 0; padding: 0; }
+.owx-did li { position: relative; padding: 9px 0 9px 18px; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.4; color: var(--fg); }
+.owx-did li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.owx-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 12px; font-weight: 600; font-size: 15px; color: var(--fg);
+  text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: .3em; text-decoration-thickness: 2px; }
+.owx-link:hover { color: var(--accent-text); }
+.owx-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+.owx-also { margin: clamp(24px, 3vw, 40px) 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.7; color: var(--fg-muted); }
+.owx-also-h { margin-right: 10px; font-weight: 600; color: var(--fg); }
+@media (min-width: 720px) { .owx-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) {
+  .owx-work { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; }
+  .owx-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owx-detail { min-height: 300px; }
+}
+@media (prefers-reduced-motion: reduce) { .owx-stage-in, .owx-tiles li, .owx-detail-in { animation: none !important; } }

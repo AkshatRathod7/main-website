@@ -250,6 +250,21 @@ export const CLIENTS: Client[] = [
     quote: { text: "From zero to 15K, and a real business.", by: "Karishma Rathod", approved: false },
   },
   {
+    name: "Dhaval Upendrakumar",
+    category: "Creator and personal brand",
+    group: "Creators",
+    did: ["End-to-end growth of his personal brand", "A content strategy with purpose behind every post", "Brand collaborations that opened new doors", "An engaged community around his work", "The full 3C framework: Content, Collaboration, Community"],
+    quote: { text: "They didn't grow my page. They built my ecosystem.", by: "Dhaval Upendrakumar", approved: false },
+  },
+  {
+    name: "Meghna Dharamsey",
+    category: "Creator",
+    group: "Creators",
+    did: ["Built her community from the ground up", "Built her own product", "Planned her content strategy", "100% organic, real-audience growth"],
+    result: "2K to 7K organic followers",
+    quote: { text: "Real, organic growth, and a community that cares.", by: "Meghna Dharamsey", approved: false },
+  },
+  {
     name: "Meher On Money",
     category: "Finance creator",
     group: "Creators",
@@ -270,6 +285,40 @@ export const CLIENTS: Client[] = [
     did: ["Moved from offline teaching to fully online", "Built her online brand from scratch", "Grew her online presence and leads"],
     quote: { text: "From the classroom to a thriving online brand.", by: "Chandani Academy", approved: false },
   },
+  // The next three come from the previous dreamsvin.com (the team's own published client list), not the
+  // testimonials doc. Only the facts stated there are used; Isha should confirm them before launch.
+  {
+    name: "Eureka Forbes",
+    category: "Legacy consumer brand",
+    group: "Businesses",
+    did: ["Found 12+ gaps in the brand's digital presence", "Ran an online reputation strategy with Schbang", "Gave a 40-year-old brand a modern growth set-up"],
+  },
+  {
+    name: "Mumbai 10K Challenge",
+    category: "Community running event",
+    group: "Institutions & events",
+    did: ["Ran the event end to end", "Secured Red Bull and Fitbit as partners", "Coordinated 200+ volunteers", "Built a repeatable system for 10,000+ participants"],
+  },
+  {
+    name: "Redefined",
+    category: "Community",
+    group: "Institutions & events",
+    did: ["Built the playbook for scaling the community", "Planned expansion across Mumbai, Pune, Delhi and Bangalore", "A repeatable launch system for each new city"],
+  },
+];
+
+/** Also on the client list of the previous site, with no write-up yet. Shown by name or logo only. */
+export const ALSO_WORKED_WITH = ["Culture Circle", "Analogy Design", "Estoquie", "Rise Global", "Pickle Paloza", "Here Comes The Bride", "House of Ekketa", "Ironman Kapil Arora", "Transform with Purva", "With Love Hitay", "PharmaGyan Academy"] as const;
+
+/**
+ * Every client in one list, for the client wall on the home page: the seven case studies first (they link to
+ * their story), then the rest of the roster. "What we did" comes straight from the entries above.
+ */
+export type RosterEntry = { name: string; category: string; group: Client["group"]; did: string[]; result?: string; slug?: string };
+const CASE_GROUP: Record<string, Client["group"]> = { snjb: "Institutions & events", "priyanshi-yadav": "Creators", "strongher-after-40": "Creators" };
+export const ROSTER: RosterEntry[] = [
+  ...CASES.map((c) => ({ name: c.client, category: c.sector, group: CASE_GROUP[c.slug] ?? ("Businesses" as const), did: c.built, result: c.result ? `${c.result.v} · ${c.result.k}` : undefined, slug: c.slug })),
+  ...CLIENTS.map((c) => ({ name: c.name, category: c.category, group: c.group, did: c.did, result: c.result })),
 ];
 
 /**
@@ -281,6 +330,7 @@ export const RESULTS = [
   { v: 15, suffix: "K", prefix: "0 → ", k: "followers, from a standing start", who: "Karishma Rathod", verified: true },
   { v: 10, suffix: "K", prefix: "", k: "followers in two weeks", who: "CA Priyanshi Yadav", verified: true },
   { v: 169, suffix: "K", prefix: "", k: "views on one reel, from a dormant page", who: "Yogsadhak", verified: true },
+  { v: 7, suffix: "K", prefix: "2K → ", k: "organic followers", who: "Meghna Dharamsey", verified: true },
   { v: 100, suffix: "", prefix: "", k: "years of legacy, rebranded", who: "SNJB, est. 1928", verified: true },
 ] as const;
 

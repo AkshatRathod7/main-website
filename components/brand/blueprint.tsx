@@ -12,7 +12,12 @@ import { PROBLEM, STAGES } from "@/content/site";
  * scale storey with a crane still on site. It draws itself along a 90-day ruler while a day counter runs
  * from 001 to 090, so the four sprint phases are the construction schedule.
  *
- * The one live thing: "Where is your business today?" Pick a situation (the four Problem cards) and the
+ * Click to build: every click on the sheet (or the button under it) builds the next sprint phase: Diagnose
+ * shows the survey lines only, Plan lays the foundation, Execute raises the three growth floors, Optimise
+ * adds the scale storey. A storey or its label lights the stage where that work starts; a ruler phase jumps
+ * straight to it.
+ *
+ * The other live thing: "Where is your business today?" Pick a situation (the four Problem cards) and the
  * drawing lights the storey where the work starts. Buttons are real buttons; the answer is announced.
  *
  * Motion: CSS draws the lines (stroke-dashoffset on pathLength=1), JS only runs the counter. Every
@@ -42,6 +47,10 @@ export function HeroBlueprint() {
   const [pick, setPick] = useState(0);
   const [day, setDay] = useState(DAYS);
   const [running, setRunning] = useState(false);
+  // Click to build: null until the visitor clicks, then the phase the drawing is built up to (0 to 3).
+  const [step, setStep] = useState<number | null>(null);
+  // the visitor has answered "Where is your business today?": the drawing answers back (see the bp-hl layer)
+  const [picked, setPicked] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const id = useId();
 
@@ -81,9 +90,21 @@ export function HeroBlueprint() {
   const card = PROBLEM.cards[pick];
   const stage = STAGES.find((s) => s.key === card.stage)!;
   const phase = PHASES.find((p) => day >= p.from && day <= p.to)!;
+  const nextStep = step === null ? 0 : (step + 1) % PHASES.length;
+  const goTo = (i: number) => {
+    if (running) return;
+    setStep(i);
+    setDay(PHASES[i].to);
+  };
+  // a storey or its label: light the stage where that work starts
+  const pickStage = (key: string) => (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const i = PROBLEM.cards.findIndex((c) => c.stage === key);
+    if (i >= 0) setPick(i);
+  };
 
   return (
-    <div ref={sheetRef} className="bp" data-start={card.stage} data-build="still">
+    <div ref={sheetRef} className="bp" data-start={card.stage} data-build="still" data-step={step ?? undefined}>
       {/* Picker */}
       <div className="bp-pick">
         <p id={`${id}-q`} className="bp-q">
@@ -95,7 +116,10 @@ export function HeroBlueprint() {
               key={c.k}
               type="button"
               aria-pressed={pick === i}
-              onClick={() => setPick(i)}
+              onClick={() => {
+                setPick(i);
+                setPicked(true);
+              }}
               className="bp-opt"
               data-event={`Hero pick ${c.k}`}
             >
@@ -116,7 +140,7 @@ export function HeroBlueprint() {
       </div>
 
       {/* Drawing */}
-      <figure className="bp-sheet" aria-label="A drawing of a business built in three stages over a 90-day plan">
+      <figure className="bp-sheet" aria-label="A drawing of a business built in three stages over a 90-day plan" onClick={() => goTo(nextStep)}>
         <svg viewBox="0 0 800 470" className="bp-svg" role="img" aria-hidden="true">
           <defs>
             <pattern id={`${id}-hatch`} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -138,7 +162,7 @@ export function HeroBlueprint() {
           <line x1="270" y1={GROUND} x2="790" y2={GROUND} className="bp-ln bp-ground" pathLength={1} style={{ ["--d" as string]: "0ms" }} />
 
           {/* Foundation: slab + piles, hatched */}
-          <g className="bp-st st-foundation" style={{ ["--d" as string]: "250ms" }}>
+          <g className="bp-st st-foundation" style={{ ["--d" as string]: "250ms" }} onClick={pickStage("foundation")}>
             <rect x={BX - 14} y={GROUND} width={BW + 28} height="22" className="bp-fill" />
             <rect x={BX - 14} y={GROUND} width={BW + 28} height="22" fill={`url(#${id}-hatch)`} className="bp-hatchfill" />
             <rect x={BX - 14} y={GROUND} width={BW + 28} height="22" className="bp-ln" pathLength={1} />
@@ -151,7 +175,7 @@ export function HeroBlueprint() {
           {["Content", "Community", "Collaborations"].map((f, i) => {
             const y = GROUND - FLOOR * (i + 1);
             return (
-              <g key={f} className="bp-st st-growth" style={{ ["--d" as string]: `${1500 + i * 420}ms` }}>
+              <g key={f} className="bp-st st-growth" style={{ ["--d" as string]: `${1500 + i * 420}ms` }} onClick={pickStage("growth")}>
                 <rect x={BX} y={y} width={BW} height={FLOOR} className="bp-fill" />
                 <rect x={BX} y={y} width={BW} height={FLOOR} className="bp-ln" pathLength={1} />
                 {[0, 1, 2, 3, 4, 5].map((w) => (
@@ -165,7 +189,7 @@ export function HeroBlueprint() {
           })}
 
           {/* Scale: the top storey, parapet and a flag */}
-          <g className="bp-st st-scale" style={{ ["--d" as string]: "2900ms" }}>
+          <g className="bp-st st-scale" style={{ ["--d" as string]: "2900ms" }} onClick={pickStage("scale")}>
             <rect x={BX + 30} y={GROUND - FLOOR * 4 - 4} width={BW - 60} height={FLOOR + 4} className="bp-fill" />
             <rect x={BX + 30} y={GROUND - FLOOR * 4 - 4} width={BW - 60} height={FLOOR + 4} className="bp-ln" pathLength={1} />
             <path d={`M${BX + 22} ${GROUND - FLOOR * 4 - 4} h${BW - 44}`} className="bp-ln" pathLength={1} />
@@ -189,18 +213,61 @@ export function HeroBlueprint() {
           </g>
 
           {/* Stage labels with leaders */}
+          {/* The drawing's answer to the picker. Each situation marks a different part, drawn fresh on every
+              click: starting out = the foundation and its piles; stuck = the growth floors' windows light up
+              and go dim, then the foundation is marked (the cause is lower down); stretched = the scale storey plus the next storey, dashed; an institution = the
+              whole outline, ground to flag. */}
+          {picked && (
+            <g key={pick} className="bp-hl" aria-hidden="true">
+              {pick === 0 && (
+                <>
+                  <rect x={BX - 14} y={GROUND} width={BW + 28} height="22" className="bp-hl-ln" pathLength={1} />
+                  {[310, 375, 440, 505, 570].map((x, k) => (
+                    <line key={x} x1={x} y1={GROUND + 22} x2={x} y2={GROUND + 46} className="bp-hl-ln" pathLength={1} style={{ ["--k" as string]: k + 3 }} />
+                  ))}
+                </>
+              )}
+              {pick === 1 && (
+                <>
+                  {[0, 1, 2].flatMap((f) =>
+                    [0, 1, 2, 3, 4, 5].map((k) => (
+                      <rect key={`${f}-${k}`} x={BX + 16 + k * 44} y={GROUND - FLOOR * (f + 1) + 14} width="26" height="22" rx="1" className="bp-hl-win" style={{ ["--k" as string]: f * 6 + k }} />
+                    )),
+                  )}
+                  <rect x={BX - 14} y={GROUND} width={BW + 28} height="22" className="bp-hl-ln" pathLength={1} style={{ ["--k" as string]: 20 }} />
+                </>
+              )}
+              {pick === 2 && (
+                <>
+                  <rect x={BX + 30} y={GROUND - FLOOR * 3 - 54} width={BW - 60} height="54" className="bp-hl-ln" pathLength={1} />
+                  <rect x={BX + 30} y={GROUND - FLOOR * 3 - 108} width={BW - 60} height="54" className="bp-hl-ghost" />
+                </>
+              )}
+              {pick === 3 && (
+                <>
+                  <path
+                    d={`M${BX - 14} ${GROUND + 22} V${GROUND} H${BX} V${GROUND - FLOOR * 3} H${BX + 30} V${GROUND - FLOOR * 3 - 54} H${BX + BW - 30} V${GROUND - FLOOR * 3} H${BX + BW} V${GROUND} H${BX + BW + 14} V${GROUND + 22} Z`}
+                    className="bp-hl-ln"
+                    pathLength={1}
+                  />
+                  <path d="M440 142 l26 8 l-26 8 z" className="bp-hl-flag" />
+                </>
+              )}
+            </g>
+          )}
+
           <g className="bp-labels">
-            <g className="bp-lab lab-scale" style={{ ["--d" as string]: "3200ms" }}>
+            <g className="bp-lab lab-scale" style={{ ["--d" as string]: "3200ms" }} onClick={pickStage("scale")}>
               <text x="60" y={GROUND - FLOOR * 4 + 22} className="bp-name">Scale</text>
               <text x="60" y={GROUND - FLOOR * 4 + 42} className="bp-sub">Systems, team, new markets</text>
               <path d={`M240 ${GROUND - FLOOR * 4 + 16} H${BX + 22}`} className="bp-lead" />
             </g>
-            <g className="bp-lab lab-growth" style={{ ["--d" as string]: "2300ms" }}>
+            <g className="bp-lab lab-growth" style={{ ["--d" as string]: "2300ms" }} onClick={pickStage("growth")}>
               <text x="60" y={GROUND - FLOOR * 2 + 4} className="bp-name">Growth</text>
               <text x="60" y={GROUND - FLOOR * 2 + 24} className="bp-sub">Content, community, collaborations</text>
               <path d={`M240 ${GROUND - FLOOR * 2 - 2} H${BX - 8}`} className="bp-lead" />
             </g>
-            <g className="bp-lab lab-foundation" style={{ ["--d" as string]: "900ms" }}>
+            <g className="bp-lab lab-foundation" style={{ ["--d" as string]: "900ms" }} onClick={pickStage("foundation")}>
               <text x="60" y={GROUND + 6} className="bp-name">Foundation</text>
               <text x="60" y={GROUND + 26} className="bp-sub">Positioning, offer, brand</text>
               <path d={`M240 ${GROUND} H${BX - 22}`} className="bp-lead" />
@@ -211,7 +278,8 @@ export function HeroBlueprint() {
           <g className="bp-ruler">
             <line x1={X0} y1="452" x2={X1} y2="452" className="bp-ruler-line" />
             {PHASES.map((p, i) => (
-              <g key={p.name}>
+              <g key={p.name} className="bp-phase-hit" onClick={(e) => { e.stopPropagation(); goTo(i); }}>
+                <rect x={dayX(p.from)} y="436" width={dayX(p.to) - dayX(p.from)} height="34" fill="transparent" />
                 <line x1={dayX(p.from)} y1="444" x2={dayX(p.from)} y2="460" className="bp-ruler-tick" />
                 <text x={dayX(p.from) + 6} y="468" className={i === PHASES.indexOf(phase) ? "bp-phase bp-phase-on" : "bp-phase"}>
                   {p.name}
@@ -243,9 +311,14 @@ export function HeroBlueprint() {
           </span>
           <span className="bp-title-row">
             <span>Phase</span>
-            <b>{phase.name}</b>
+            <b aria-live="polite">{phase.name}</b>
           </span>
         </figcaption>
+        {/* The same click as the drawing, as a real button: each press builds the next phase. */}
+        <button type="button" className="bp-next" onClick={(e) => { e.stopPropagation(); goTo(nextStep); }} disabled={running} data-event="Hero build step">
+          <span className="bp-next-dot" aria-hidden="true" />
+          {step === null ? "Click the drawing to build it, phase by phase" : `Next: ${PHASES[nextStep].name}`}
+        </button>
       </figure>
     </div>
   );

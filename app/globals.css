@@ -17,6 +17,9 @@
 @import "../styles/health-check.css";
 @import "../styles/brand.css";
 @import "../styles/living.css";
+@import "../styles/home-c.css";
+@import "../styles/home-a.css";
+@import "../styles/home-b.css";
 
 /* ───────────────────────── 1. Primitives ───────────────────────── */
 :root {
