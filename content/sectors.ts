@@ -40,7 +40,7 @@ export const SECTORS: Sector[] = [
     name: "Creators & experts",
     line: "People with something to teach, finally heard.",
     clients: ["Karishma Rathod", "Meher On Money", "CA Priyanshi Yadav", "Dhaval Upendrakumar", "Meghna Dharamsey", "Will Power Star"],
-    proof: { v: "0 → 15K", k: "followers, from a standing start", who: "Karishma Rathod" },
+    proof: { v: "3C", k: "Content, Collaboration, Community: a personal brand grown end to end", who: "Dhaval Upendrakumar" },
   },
   {
     key: "finance",

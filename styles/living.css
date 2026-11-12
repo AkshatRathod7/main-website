@@ -74,6 +74,15 @@ a:hover .lg-sv, a:focus-visible .lg-sv, .lg:hover .lg-sv{ translate: 0 -24%; rot
 .hp-num{ margin-top: 18px; }
 .hp-num .numeric{ display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(3rem, 2rem + 2.6vw, 4.25rem); line-height: .95; letter-spacing: -.045em; }
 .hp-k{ display: block; margin-top: 6px; font-size: 15px; color: var(--c-cream-muted); }
+/* hero card pictures: the client's logo or face beside the name, and large in place of the curve when there is no figure */
+.hp-ava-photo{ width: 44px; height: 44px; object-fit: cover; background: none; }
+.hp-ava-logo{ width: 44px; height: 44px; padding: 7px; background: var(--c-cream); }
+.hp-ava-logo img{ display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
+.hp-pic{ display: flex; align-items: flex-end; justify-content: flex-start; height: 112px; margin-top: 18px; animation: spy-in .6s cubic-bezier(.2,.8,.2,1) .15s both; }
+.hp-pic-logo{ display: block; max-height: 78px; max-width: 78%; width: auto; height: auto; filter: grayscale(1) invert(1) brightness(1.2); opacity: .92; }
+.hp-pic-photo{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; box-shadow: 0 0 0 1px rgb(249 245 239 / .18); }
+@media (prefers-reduced-motion: reduce){ .hp-pic{ animation: none; } }
+.hp-num .hp-word{ font-size: clamp(2.3rem, 1.7rem + 1.7vw, 3.1rem); line-height: 1; white-space: nowrap; animation: spy-in .5s cubic-bezier(.2,.8,.2,1); }
 .hp-chart{ display: block; max-width: none; width: calc(100% + 44px); height: auto; margin: 8px -22px 0; }
 .hp-area{ fill: rgb(255 112 92 / .22); }
 .hp-line{ fill: none; stroke: #ff8a6e; stroke-width: 3; stroke-linecap: round; }

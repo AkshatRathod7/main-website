@@ -28,8 +28,8 @@ function proofFor(name: string, pick: (c: (typeof CLIENTS)[number]) => string | 
   return { who: c.name, fact, photo: CLIENT_PHOTOS[c.name], logo: CLIENT_LOGOS[c.name] };
 }
 const PROOFS: (Proof | null)[] = [
-  proofFor("Yogsadhak", (c) => c.result),
-  proofFor("Meghna Dharamsey", (c) => c.result),
+  proofFor("Prustlr", (c) => c.did.find((d) => d.startsWith("Reels"))),
+  proofFor("Dhaval Upendrakumar", (c) => c.did.find((d) => d.includes("community"))),
   proofFor("Meher On Money", (c) => c.did.find((d) => d.includes("upGrad"))),
 ];
 
