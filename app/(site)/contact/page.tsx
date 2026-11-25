@@ -1,6 +1,6 @@
 // Contact. Copy: DreamSVin Website Copy, "Contact" blocks (hero, qualifying form, sidebar).
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd, breadcrumbNode, graph, pageMetadata } from "@/lib/seo";
 import { site, whatsappHref } from "@/lib/site";
 import { Headline } from "@/components/ui/headline";
 import { Kicker } from "@/components/brand/sections";
@@ -21,6 +21,7 @@ export default function ContactPage() {
   const wa = whatsappHref();
   return (
     <>
+      <JsonLd data={graph(breadcrumbNode([{ name: "Contact", path: "/contact" }]))} />
       <section aria-labelledby="page-h" className="hero pb-12 pt-[calc(var(--nav-height)+clamp(3rem,8vw,7rem))]">
         <span aria-hidden="true" className="hero-glow" />
         <div className="container-ds grid gap-8 md:grid-cols-12 md:items-end">

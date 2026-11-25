@@ -1,7 +1,7 @@
 // Accessibility statement. Every claim here is something this build does and was tested for (axe WCAG 2.2 AA,
 // keyboard, reduced motion, 360–1440px). Update the "last checked" date when the site is re-audited.
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd, breadcrumbNode, graph, pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/brand/sections";
 
 export const metadata: Metadata = pageMetadata({
@@ -25,6 +25,7 @@ const done = [
 export default function AccessibilityPage() {
   return (
     <>
+      <JsonLd data={graph(breadcrumbNode([{ name: "Accessibility", path: "/accessibility" }]))} />
       <PageHero
         kicker="Accessibility"
         lines={["A site everyone", "can use."]}

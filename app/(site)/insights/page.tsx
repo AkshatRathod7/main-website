@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd, breadcrumbNode, graph, pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, Eyebrow } from "@/components/editorial/primitives";
@@ -20,6 +20,7 @@ export default async function InsightsIndex() {
 
   return (
     <>
+      <JsonLd data={graph(breadcrumbNode([{ name: "Insights", path: "/insights" }]))} />
       <section className="pt-40 pb-20 md:pt-52 md:pb-28">
         <Container className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
