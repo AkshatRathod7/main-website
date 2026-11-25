@@ -3,6 +3,8 @@ import { cn } from "@/lib/cn";
 import { CopyEmail } from "./CopyEmail";
 import { Wordmark } from "./nav";
 import { FooterFloor } from "./footer-grow";
+import { FOUNDER_SOCIAL, SOCIAL } from "@/lib/site";
+import { LANDING_LINKS } from "@/content/landing";
 
 /**
  * Footer: charcoal floor, the brand line, the index, contact, then the wordmark set large as a sign-off.
@@ -15,7 +17,7 @@ const COLUMNS = [
       { href: "/#what-we-do", label: "What We Do" },
       { href: "/#how-we-work", label: "How We Work" },
       { href: "/#work", label: "Our Work" },
-      { href: "/#about", label: "About" },
+      { href: "/about", label: "About" },
     ],
   },
   {
@@ -27,16 +29,18 @@ const COLUMNS = [
       { href: "/contact", label: "Contact" },
     ],
   },
+  { title: "Ways in", links: LANDING_LINKS },
 ] as const;
 
 const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "grow@dreamsvin.com";
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 const ENTITY = process.env.NEXT_PUBLIC_LEGAL_ENTITY;
+// Same URLs as the Organization / Person sameAs (lib/site.ts), so profiles and schema always agree.
 const SOCIALS = [
-  { label: "Instagram", href: process.env.NEXT_PUBLIC_INSTAGRAM_URL },
-  { label: "LinkedIn", href: process.env.NEXT_PUBLIC_LINKEDIN_URL },
-  { label: "YouTube", href: process.env.NEXT_PUBLIC_YOUTUBE_URL },
-].filter((s): s is { label: string; href: string } => Boolean(s.href));
+  { label: "Instagram", aria: "Instagram: DreamSVin", href: SOCIAL.instagram },
+  { label: "LinkedIn", aria: "LinkedIn: DreamSVin", href: SOCIAL.linkedin },
+  { label: "Isha on LinkedIn", aria: "Isha on LinkedIn: Isha Vijay Ostwal", href: FOUNDER_SOCIAL.linkedin },
+];
 
 const linkCls =
   "group/fl inline-flex min-h-11 items-center gap-2 rounded-xs text-body-sm text-fg-muted transition-colors duration-fast ease-out hover:text-fg " +
@@ -47,13 +51,13 @@ export function Footer({ className }: { className?: string }) {
     <footer data-tone="ink" className={cn("relative overflow-hidden", className)}>
       <div className="container-ds pt-section-sm">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12">
-          <div className="col-span-2 flex flex-col gap-5 md:col-span-5">
+          <div className="col-span-2 flex flex-col gap-5 md:col-span-3">
             <Wordmark height={20} className="self-start" />
             <p className="max-w-[26ch] font-display text-heading-md font-bold text-fg">
               Business architects and growth partners.
             </p>
             <p className="max-w-[40ch] text-body-sm text-fg-subtle">
-              We help businesses build, grow and scale. We make the plan, then help you carry it out.
+              Growth acceleration partner for founder-led businesses and institutions in India. We make the plan, then help you carry it out.
             </p>
           </div>
 
@@ -87,19 +91,18 @@ export function Footer({ className }: { className?: string }) {
                 Message on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
               </a>
             )}
-            {SOCIALS.length > 0 && (
-              <ul className="mt-2 flex flex-wrap gap-x-5">
-                {SOCIALS.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                      {s.label}
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <p className="mt-2 text-body-sm text-fg-subtle">Based in India. Working with businesses everywhere.</p>
+            <ul className="mt-2 flex flex-wrap gap-x-5">
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                    {s.label}
+                    {/* the visible label starts the accessible name (WCAG 2.5.3); the rest is for screen readers */}
+                    <span className="sr-only">{s.aria.slice(s.label.length) || ""} (opens in a new tab)</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-body-sm text-fg-subtle">Mumbai, India. Working in Pune and across India.</p>
           </div>
         </div>
 

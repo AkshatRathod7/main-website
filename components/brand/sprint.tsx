@@ -143,7 +143,7 @@ export function Sprint({ title, intro, id = "sprint-h" }: { title: React.ReactNo
                   onClick={() => goTo(i)}
                   aria-current={pinned && i === active ? "step" : undefined}
                   className={cn(
-                    "sprint-chip inline-flex h-11 items-center gap-2 rounded-full border px-4 text-body-sm transition-[background-color,border-color,color] duration-base ease-out",
+                    "sprint-chip inline-flex h-11 items-center gap-2 rounded-full border px-4 text-body-sm transition-none",
                     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
                     pinned && i === active
                       ? "border-accent bg-accent text-on-accent"

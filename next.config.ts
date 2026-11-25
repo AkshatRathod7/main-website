@@ -17,12 +17,12 @@ const nextConfig: NextConfig = {
   // Older routes that the one-page home replaces.
   async redirects() {
     return [
-      // The home page is the site. The four overview pages became chapters of it.
+      // The home page is the site. Three overview pages became chapters of it. /about is a real page again
+      // (founder and company facts for search engines), so it is not redirected.
       // Service detail pages (/what-we-do/:slug) stay; only the exact overview paths move.
       { source: "/what-we-do", destination: "/#what-we-do", permanent: true },
       { source: "/how-we-work", destination: "/#how-we-work", permanent: true },
       { source: "/work", destination: "/#work", permanent: true },
-      { source: "/about", destination: "/#about", permanent: true },
       { source: "/approach", destination: "/#how-we-work", permanent: true },
       { source: "/systems", destination: "/#what-we-do", permanent: true },
       { source: "/systems/:path*", destination: "/#what-we-do", permanent: true },

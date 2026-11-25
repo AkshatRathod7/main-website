@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "DreamSVin website: business architects and growth partners.",
-  "engines": { "node": ">=20.9" },
+  "engines": {
+    "node": ">=20.9"
+  },
   "scripts": {
     "dev": "next dev",
     "check:todos": "tsx scripts/check-todos.ts",
@@ -11,7 +13,8 @@
     "build:launch": "tsx scripts/check-todos.ts && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test lib/health-check/scoring.test.ts"
+    "test": "tsx --test lib/health-check/scoring.test.ts",
+    "check:seo": "tsx scripts/check-seo.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

@@ -13,7 +13,7 @@ const links: { href: string; label: string; note: string; icon: BrandIconName }[
   { href: "/#what-we-do", label: "What We Do", note: "Foundation, Growth, Scale", icon: "grid" },
   { href: "/#how-we-work", label: "How We Work", note: "The 90-day sprint", icon: "loop" },
   { href: "/#work", label: "Our Work", note: "Real businesses, real work", icon: "stack" },
-  { href: "/#about", label: "About", note: "Who you'd work with", icon: "eye" },
+  { href: "/about", label: "About", note: "Who you'd work with", icon: "eye" },
 ];
 
 export default function NotFound() {

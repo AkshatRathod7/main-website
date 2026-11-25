@@ -17,7 +17,7 @@ import { OurWork } from "@/components/brand/sector-index";
 import { GrowthEngine } from "@/components/home/growth-engine";
 import { getAllInsights } from "@/lib/insights";
 import { Head, TrustStrip, quotesFrom } from "@/components/brand/sections";
-import { FINAL_CTA, HERO, HOW_TEASER, PRIMARY_CTA } from "@/content/site";
+import { FINAL_CTA, HERO, HOME_SEO, HOW_TEASER, POSITIONING, PRIMARY_CTA } from "@/content/site";
 import { CASES } from "@/content/cases";
 import { JsonLd, homeGraph } from "@/lib/seo";
 import { FAQ_SCHEMA } from "@/components/home/faq-schema";
@@ -26,16 +26,16 @@ import { HomeInsightsFaq } from "@/components/home/insights-faq";
 import { FinalCall } from "@/components/home/final-call";
 
 export const metadata: Metadata = {
-  title: { absolute: "DreamSVin: Your Business Architects. Your Growth Partners." },
-  description: "We find what's holding your business back, build a 90-day plan, and help you execute it. Book a free consultation.",
+  title: { absolute: HOME_SEO.title },
+  description: HOME_SEO.description,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "DreamSVin: Your Business Architects. Your Growth Partners.",
-    description: "We find what's holding your business back, build a 90-day plan, and help you execute it.",
+    title: HOME_SEO.title,
+    description: HOME_SEO.description,
     url: "/",
     images: ["/opengraph-image"],
   },
-  twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
+  twitter: { card: "summary_large_image", title: HOME_SEO.title, description: HOME_SEO.description, images: ["/opengraph-image"] },
 };
 
 const [G0, G1] = HERO.lines[1].split("Growth");
@@ -51,6 +51,8 @@ export default async function HomePage() {
       <section aria-labelledby="hero-h" className="hero pb-section-sm pt-[calc(var(--nav-height)+clamp(2rem,5vw,4.5rem))]">
         <div className="container-ds">
           <Headline as="h1" id="hero-h" size="display-2xl" reveal="load" lines={[HERO.lines[0], <Fragment key="growth">{G0}<span className="hero-grad">Growth</span>{G1}</Fragment>]} className="hero-h1" />
+          {/* The category, in plain words. Static (no load animation) so it is readable at first paint. */}
+          <p className="mt-6 max-w-[60ch] text-body-lg font-semibold text-fg">{POSITIONING}</p>
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
               <p className="hero-sub max-w-[46ch] text-body-lg text-fg-muted">{HERO.sub}</p>
@@ -103,6 +105,16 @@ export default async function HomePage() {
             intro="Pick an industry to see who we grew there, and what changed."
           />
           <OurWork />
+          <p className="mt-10 text-body-lg text-fg-muted">
+            Working with a college or a real estate business?{" "}
+            <Link href="/what-we-do/institutions" className="font-semibold text-fg underline decoration-line-strong underline-offset-[0.22em] hover:text-accent-text">
+              Institutions
+            </Link>{" "}
+            ·{" "}
+            <Link href="/what-we-do/real-estate" className="font-semibold text-fg underline decoration-line-strong underline-offset-[0.22em] hover:text-accent-text">
+              Real estate founders
+            </Link>
+          </p>
         </div>
       </section>
 

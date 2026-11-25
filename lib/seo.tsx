@@ -1,15 +1,17 @@
 /**
  * SEO + structured data (Stage 10). One source for the site URL, page metadata and JSON-LD.
- * Facts only: no ratings, reviews, invented clients, addresses or social profiles.
- * Values that need a real business fact read from env and are omitted when empty.
+ * Facts only: no ratings, reviews, invented clients or street addresses. Social profiles come from SOCIAL /
+ * FOUNDER_SOCIAL in lib/site.ts, the same list the footer and /about link to.
  */
 import type { Metadata } from "next";
+import { FOUNDER_SOCIAL, SITE_URL, SOCIAL } from "@/lib/site";
 
-export const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://dreamsvin.com").replace(/\/$/, "");
+/** Alias of SITE_URL (lib/site.ts), kept so existing imports read the same constant. */
+export const SITE = SITE_URL;
 export const SITE_NAME = "DreamSVin";
 export const TAGLINE = "Your Business Architects. Your Growth Partners.";
 export const DEFAULT_DESCRIPTION =
-  "We find what's holding your business back, build a focused 90-day plan, and help you execute it. Business architects and growth partners for startups, established businesses and institutions.";
+  "Growth acceleration partner for founder-led businesses and institutions in India. We find what's holding the business back, build a focused 90-day plan, and help execute it.";
 
 const ORG_ID = `${SITE}/#organization`;
 const SERVICE_ID = `${SITE}/#professional-service`;
@@ -58,31 +60,77 @@ export function JsonLd({ data }: { data: object }) {
 }
 
 const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "grow@dreamsvin.com";
-const city = process.env.NEXT_PUBLIC_CITY || "";
-const sameAs = (process.env.NEXT_PUBLIC_SAME_AS || "").split(",").map((s) => s.trim()).filter(Boolean);
+
+export const PERSON_ID = `${SITE}/about#isha`;
+export const personRef = { "@id": PERSON_ID };
+
+/** Where we work. Cities are where the team and the BNC community are; no street address is published. */
+const AREA_SERVED = [
+  { "@type": "Country", name: "India" },
+  { "@type": "City", name: "Mumbai", containedInPlace: { "@type": "State", name: "Maharashtra" } },
+  { "@type": "City", name: "Pune", containedInPlace: { "@type": "State", name: "Maharashtra" } },
+];
+const ADDRESS = { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "Maharashtra", addressCountry: "IN" };
+export const ORG_DESCRIPTION =
+  "Growth acceleration partner for founder-led businesses and institutions in India. DreamSVin finds what is holding a business back, builds a focused 90-day Growth Sprint and helps execute it. Not a social media agency.";
+
+// TODO(isha): confirm the founding year. "2025" comes from the brief, not a registry record.
+const FOUNDING_DATE = "2025";
 
 export const organizationNode = () => ({
   "@type": "Organization",
   "@id": ORG_ID,
   name: SITE_NAME,
+  alternateName: "DreamSVin Consultancy",
   url: SITE,
   logo: `${SITE}/icon.svg`,
   slogan: TAGLINE,
+  description: ORG_DESCRIPTION,
   email,
-  ...(sameAs.length ? { sameAs } : {}),
+  foundingDate: FOUNDING_DATE,
+  founder: personRef,
+  areaServed: AREA_SERVED,
+  address: ADDRESS,
+  sameAs: Object.values(SOCIAL),
+});
+
+export const personNode = () => ({
+  "@type": "Person",
+  "@id": PERSON_ID,
+  name: "Isha Vijay Ostwal",
+  alternateName: "Isha Ostwal",
+  jobTitle: "Founder",
+  description:
+    "Founder of DreamSVin and of Bombay Networking Circle. World Economic Forum Global Shaper. National Co-Convenor, JITO Incubation & Innovation Foundation (JIIF). Based in Mumbai.",
+  url: `${SITE}/about`,
+  image: `${SITE}/people/isha.jpg`,
+  worksFor: { "@id": ORG_ID },
+  homeLocation: { "@type": "City", name: "Mumbai" },
+  sameAs: Object.values(FOUNDER_SOCIAL),
+  affiliation: [
+    { "@type": "Organization", name: "World Economic Forum Global Shapers Community" },
+    { "@type": "Organization", name: "JITO Incubation & Innovation Foundation (JIIF)" },
+    { "@type": "Organization", name: "Bombay Networking Circle", founder: personRef },
+  ],
+  knowsAbout: ["Business growth strategy", "Founder-led businesses", "Execution", "Community building", "Personal branding"],
 });
 
 export const professionalServiceNode = () => ({
   "@type": "ProfessionalService",
   "@id": SERVICE_ID,
   name: SITE_NAME,
+  alternateName: "DreamSVin Consultancy",
   url: SITE,
   image: `${SITE}/opengraph-image`,
-  description: DEFAULT_DESCRIPTION,
+  description: ORG_DESCRIPTION,
   email,
+  founder: personRef,
   parentOrganization: { "@id": ORG_ID },
-  areaServed: { "@type": "Country", name: "India" },
+  areaServed: AREA_SERVED,
+  address: ADDRESS,
+  sameAs: Object.values(SOCIAL),
   knowsAbout: [
+    "90-day Growth Sprint",
     "Business strategy and positioning",
     "Brand identity and websites",
     "Content and personal branding",
@@ -90,7 +138,33 @@ export const professionalServiceNode = () => ({
     "Growth systems and automation",
     "Go-to-market and market expansion",
   ],
-  ...(city ? { address: { "@type": "PostalAddress", addressLocality: city, addressCountry: "IN" } } : {}),
+});
+
+/** A service page (or a city / sector page that sells the same sprint). */
+export const serviceNode = ({ name, description, path, serviceType, area }: { name: string; description: string; path: string; serviceType?: string; area?: object | object[] }) => ({
+  "@type": "Service",
+  "@id": `${SITE}${path}#service`,
+  name,
+  description,
+  url: `${SITE}${path}`,
+  ...(serviceType ? { serviceType } : {}),
+  provider: { "@id": ORG_ID },
+  areaServed: area ?? AREA_SERVED,
+});
+
+/** An insight. Author is the founder; dateModified falls back to datePublished. */
+export const articleNode = ({ title, description, path, published, modified }: { title: string; description: string; path: string; published: string; modified?: string }) => ({
+  "@type": "Article",
+  "@id": `${SITE}${path}#article`,
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified ?? published,
+  inLanguage: "en-IN",
+  author: personRef,
+  publisher: { "@id": ORG_ID },
+  image: `${SITE}/opengraph-image`,
+  mainEntityOfPage: `${SITE}${path}`,
 });
 
 export const websiteNode = () => ({
@@ -125,6 +199,6 @@ export const breadcrumbNode = (trail: readonly { name: string; path: string }[])
 export const graph = (...nodes: object[]) => ({ "@context": "https://schema.org", "@graph": nodes });
 
 export const homeGraph = (faq: readonly { q: string; text: string }[]) =>
-  graph(organizationNode(), websiteNode(), professionalServiceNode(), faqNode(faq));
+  graph(organizationNode(), personNode(), websiteNode(), professionalServiceNode(), faqNode(faq));
 
 export const orgRef = { "@id": ORG_ID };

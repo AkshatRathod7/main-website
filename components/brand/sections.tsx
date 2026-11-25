@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
@@ -112,8 +113,7 @@ export function TrustStrip({ link = true }: { link?: boolean }) {
     const ratio = logo.w / logo.h;
     const h = Math.round(Math.min(56, Math.max(26, 44 / Math.pow(ratio, 0.35))));
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img src={logo.src} alt={n} width={Math.round(h * ratio)} height={h} loading="lazy" decoding="async" className="logo-img" />
+      <Image src={logo.src} alt={n} width={Math.round(h * ratio)} height={h} loading="lazy" className="logo-img" />
     );
   };
   const row = (hidden: boolean) => (
@@ -157,8 +157,7 @@ function CaseMark({ c }: { c: Case }) {
   const ratio = logo.w / logo.h;
   const h = Math.round(Math.min(132, Math.max(64, 150 / Math.pow(ratio, 0.5))));
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={logo.src} alt="" width={Math.round(h * ratio)} height={h} loading="lazy" decoding="async" className="case-art-logo" style={{ height: h, maxWidth: "78%" }} />
+    <Image src={logo.src} alt="" width={Math.round(h * ratio)} height={h} loading="lazy" className="case-art-logo" style={{ height: h, maxWidth: "78%" }} />
   );
 }
 

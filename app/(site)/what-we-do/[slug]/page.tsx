@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pageMetadata, JsonLd, graph, breadcrumbNode } from "@/lib/seo";
+import { pageMetadata, JsonLd, graph, breadcrumbNode, organizationNode, serviceNode } from "@/lib/seo";
 import { Reveal } from "@/components/brand/motion";
 import { BrandIcon } from "@/components/brand/icons";
 import { CaseCard, FinalCta, Head, PageHero } from "@/components/brand/sections";
@@ -18,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const s = serviceBySlug((await params).slug);
   if (!s) return {};
-  return pageMetadata({ title: s.name, description: `${s.headline} ${s.opening}`, path: `/what-we-do/${s.slug}` });
+  return pageMetadata({ title: s.seoTitle, description: s.seoDescription, path: `/what-we-do/${s.slug}` });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,7 +36,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           breadcrumbNode([
             { name: s.name, path: `/what-we-do/${s.slug}` },
           ]),
-          { "@type": "Service", name: s.name, description: s.opening, provider: { "@id": `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://dreamsvin.com"}/#organization` } },
+          organizationNode(),
+          serviceNode({ name: s.name, description: `${s.headline} ${s.opening}`, path: `/what-we-do/${s.slug}`, serviceType: s.name }),
         )}
       />
       <PageHero kicker={`${stage.name} · ${s.name}`} lines={[s.headline]} sub={s.opening} icon={s.icon} />

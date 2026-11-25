@@ -10,6 +10,10 @@ const frontmatter = z.object({
   title: z.string(),
   dek: z.string(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  /** Last substantive edit (YYYY-MM-DD). Feeds dateModified and the sitemap; defaults to `date`. */
+  updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  /** Search title when the headline is too long for results (the layout adds " - DreamSVin"; keep ≤ 48). */
+  seoTitle: z.string().optional(),
   category: z.string(),
   author: z.string().default("DreamSVin"),
   featured: z.boolean().default(false),

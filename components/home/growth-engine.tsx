@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 /**
  * The growth engine chapter (home). Left: the founder's copy and the three Cs as rows. Right: the orbit
  * drawing (the "pull engine", carried over from components/brand/living.tsx and extended).
@@ -64,14 +65,12 @@ function useReducedMotion() {
 
 function ProofMark({ p }: { p: Proof }) {
   if (p.photo) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={p.photo} alt="" width={28} height={28} loading="lazy" decoding="async" className="ge-face" />;
+    return <Image src={p.photo} alt="" width={28} height={28} loading="lazy" className="ge-face" />;
   }
   if (p.logo) {
     return (
       <span className="ge-logo">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={p.logo.src} alt="" width={p.logo.w} height={p.logo.h} loading="lazy" decoding="async" />
+        <Image src={p.logo.src} alt="" width={p.logo.w} height={p.logo.h} loading="lazy" />
       </span>
     );
   }
