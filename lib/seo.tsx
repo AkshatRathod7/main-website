@@ -4,8 +4,10 @@
  * Values that need a real business fact read from env and are omitted when empty.
  */
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 
-export const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://dreamsvin.com").replace(/\/$/, "");
+/** Alias of SITE_URL (lib/site.ts), kept so existing imports read the same constant. */
+export const SITE = SITE_URL;
 export const SITE_NAME = "DreamSVin";
 export const TAGLINE = "Your Business Architects. Your Growth Partners.";
 export const DEFAULT_DESCRIPTION =

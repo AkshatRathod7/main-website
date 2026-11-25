@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pageMetadata, JsonLd, graph, breadcrumbNode } from "@/lib/seo";
+import { pageMetadata, JsonLd, graph, breadcrumbNode, orgRef } from "@/lib/seo";
 import { Reveal } from "@/components/brand/motion";
 import { BrandIcon } from "@/components/brand/icons";
 import { CaseCard, FinalCta, Head, PageHero } from "@/components/brand/sections";
@@ -36,7 +36,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           breadcrumbNode([
             { name: s.name, path: `/what-we-do/${s.slug}` },
           ]),
-          { "@type": "Service", name: s.name, description: s.opening, provider: { "@id": `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://dreamsvin.com"}/#organization` } },
+          { "@type": "Service", name: s.name, description: s.opening, provider: orgRef },
         )}
       />
       <PageHero kicker={`${stage.name} · ${s.name}`} lines={[s.headline]} sub={s.opening} icon={s.icon} />
