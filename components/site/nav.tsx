@@ -25,7 +25,7 @@ export const NAV_LINKS = [
   { href: "/#what-we-do", key: "what-we-do", prefix: "/what-we-do", label: "What We Do" },
   { href: "/#how-we-work", key: "how-we-work", prefix: "/how-we-work", label: "How We Work" },
   { href: "/#work", key: "work", prefix: "/work", label: "Our Work" },
-  { href: "/#about", key: "about", prefix: "/about", label: "About" },
+  { href: "/about", key: "about", prefix: "/about", label: "About" },
   { href: "/#insights", key: "insights", prefix: "/insights", label: "Insights" },
 ] as const;
 type NavItem = (typeof NAV_LINKS)[number];

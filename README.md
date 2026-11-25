@@ -64,8 +64,10 @@ scripts/             check-todos.ts, build-client-logos.mjs
 | `/contact` | Qualifying form and booking |
 | `/health-check` | 14 questions, a score and next moves (`docs/health-check/SCORING.md`) |
 | `/privacy`, `/terms`, `/accessibility` | Legal and accessibility pages |
+| `/about` | Company and founder page |
+| `/90-day-growth-sprint`, `/founder-bottleneck`, `/business-growth-consultant-mumbai`, `/business-growth-consultant-pune`, `/what-we-do/institutions`, `/what-we-do/real-estate` | Pages for the searches we want to be found for. Copy in `content/landing.ts`, template in `components/pages/landing.tsx` |
 
-`/what-we-do`, `/how-we-work`, `/work` and `/about` redirect to their chapters on the home page (`next.config.ts`).
+`/what-we-do`, `/how-we-work` and `/work` redirect to their chapters on the home page (`next.config.ts`). `/about` is its own page.
 
 ## Look and behaviour
 
