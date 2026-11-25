@@ -1,4 +1,4 @@
-import { JsonLd, SITE, breadcrumbNode, graph, orgRef } from "@/lib/seo";
+import { JsonLd, articleNode, breadcrumbNode, graph, organizationNode, personNode } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,7 +6,6 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { Container } from "@/components/editorial/primitives";
 import { mdxComponents } from "@/components/editorial/mdx";
 import { formatDate, getAllInsights, getInsight } from "@/lib/insights";
-import { site } from "@/lib/site";
 import { ReadingProgress } from "./reading-progress";
 
 type Params = { slug: string };
@@ -19,12 +18,12 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const item = await getInsight((await params).slug);
   if (!item) return {};
-  const { title, dek, date, slug } = item.meta;
+  const { title, dek, date, updated, slug, seoTitle } = item.meta;
   return {
-    title,
+    title: seoTitle ?? title,
     description: dek,
     alternates: { canonical: `/insights/${slug}` },
-    openGraph: { type: "article", title, description: dek, publishedTime: date, url: `/insights/${slug}`, siteName: "DreamSVin", locale: "en_IN" },
+    openGraph: { type: "article", title, description: dek, publishedTime: date, modifiedTime: updated ?? date, url: `/insights/${slug}`, siteName: "DreamSVin", locale: "en_IN" },
     twitter: { card: "summary_large_image", title, description: dek },
   };
 }
@@ -49,17 +48,9 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
   const next = all.find((a) => a.slug !== slug);
 
   const jsonLd = graph(
-    {
-      "@type": "Article",
-      headline: meta.title,
-      description: meta.dek,
-      datePublished: meta.date,
-      inLanguage: "en-IN",
-      author: meta.author && meta.author !== site.name ? { "@type": "Person", name: meta.author } : orgRef,
-      publisher: orgRef,
-      image: `${SITE}/opengraph-image`,
-      mainEntityOfPage: `${SITE}/insights/${slug}`,
-    },
+    articleNode({ title: meta.title, description: meta.dek, path: `/insights/${slug}`, published: meta.date, modified: meta.updated }),
+    personNode(),
+    organizationNode(),
     breadcrumbNode([
       { name: "Insights", path: "/insights" },
       { name: meta.title, path: `/insights/${slug}` },
