@@ -320,7 +320,6 @@
 [data-reveal="load"] .draw{
   background-size: 100% 0.12em;
 }
-[data-reveal="load"] .draw{ animation: draw-in 900ms var(--ease-out) 900ms both; }
 @keyframes draw-in { from { background-size: 0% 0.12em; } }
 @media (scripting: none) { .draw{ background-size: 100% 0.12em; } }
 

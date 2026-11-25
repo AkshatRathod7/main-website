@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 /**
  * The results scoreboard (client island for components/home/results.tsx).
  * Each tile is rendered whole on the server. A tile that starts below the fold is primed, and when it comes
@@ -94,11 +95,9 @@ function Tile({ r, i, open, onToggle }: { r: ResultItem; i: number; open: boolea
       <div className="res-id">
         <span className="res-mark" aria-hidden="true">
           {r.photo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={r.photo} alt="" width={44} height={44} loading="lazy" decoding="async" className="res-photo" />
+            <Image src={r.photo} alt="" width={44} height={44} loading="lazy" className="res-photo" />
           ) : r.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={r.logo.src} alt="" width={Math.round((logoH * r.logo.w) / r.logo.h)} height={logoH} loading="lazy" decoding="async" className="res-logo" style={{ height: logoH }} />
+            <Image src={r.logo.src} alt="" width={Math.round((logoH * r.logo.w) / r.logo.h)} height={logoH} loading="lazy" className="res-logo" style={{ height: logoH }} />
           ) : (
             <span className="res-initials">{initials(r.who)}</span>
           )}

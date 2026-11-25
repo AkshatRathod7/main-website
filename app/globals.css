@@ -145,7 +145,7 @@
   --stagger-item: 60ms;
   --reveal-y: 0.6em;
   --enter-y: 16px;
-  --reveal-blur: 6px;
+  --reveal-blur: 0px; /* was 6px: animating filter blur is not compositor-only. Reveals are transform + opacity. */
 
   color-scheme: light;
 }
@@ -365,24 +365,22 @@
     display: inline-block;
     transform: translate3d(0, var(--reveal-y), 0);
     opacity: 0;
-    filter: blur(var(--reveal-blur));
     transition:
       transform var(--dur-story) var(--ease-out),
-      opacity var(--dur-slower) var(--ease-out),
-      filter var(--dur-slower) var(--ease-out);
+      opacity var(--dur-slower) var(--ease-out);
     transition-delay: calc(var(--i, 0) * var(--stagger-line));
     will-change: transform, opacity;
   }
   /* reveal="load": starts at first paint, no JS. */
-  /* Stage 10: load reveals (page H1s = the LCP element) arrive by travel only — no opacity, no blur —
-     so the headline counts as painted, sharp, on the first frame. Scroll reveals keep blur-to-sharp. */
+  /* Nov 2026 (SEO/perf pass): load reveals are static. Page H1s are the LCP element and sit above the fold;
+     animating them in kept the first screen changing for ~1s and pushed Speed Index up. Scroll reveals keep
+     blur-to-sharp. */
   [data-reveal="load"] .reveal-line > span {
     transition: none;
     opacity: 1;
     filter: none;
     transform: none;
-    animation: ds-reveal-line-load var(--dur-story) var(--ease-out) both;
-    animation-delay: calc(120ms + var(--i, 0) * var(--stagger-line));
+    will-change: auto;
   }
   [data-inview="true"] .reveal-line > span {
     transform: none;

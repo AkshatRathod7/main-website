@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 /**
  * Our work, as one experience (home). Styles: styles/home-b.css (.ow-*).
  *
@@ -81,12 +82,10 @@ const initials = (s: string) =>
 
 function Mark({ name, logo, photo }: { name: string; logo?: Logo; photo?: string }) {
   if (logo) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img className="ow-logo" src={logo.src} alt="" width={logo.w} height={logo.h} loading="lazy" decoding="async" />;
+    return <Image className="ow-logo" src={logo.src} alt="" width={logo.w} height={logo.h} loading="lazy" />;
   }
   if (photo) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img className="ow-face" src={photo} alt="" width={96} height={96} loading="lazy" decoding="async" />;
+    return <Image className="ow-face" src={photo} alt="" width={96} height={96} loading="lazy" />;
   }
   return (
     <span className="ow-mono" aria-hidden="true">

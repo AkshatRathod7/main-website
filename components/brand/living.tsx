@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 /**
  * The moving parts of the home page (1 Nov redesign). Styles: styles/living.css.
  *
@@ -88,12 +89,10 @@ export function HeroProof() {
       </div>
       <div className="hp-who">
         {photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="hp-ava hp-ava-photo" src={photo} alt="" width={44} height={44} />
+          <Image loading="eager" className="hp-ava hp-ava-photo" src={photo} alt="" width={44} height={44} />
         ) : logo ? (
           <span className="hp-ava hp-ava-logo" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logo.src} alt="" width={logo.w} height={logo.h} />
+            <Image loading="eager" src={logo.src} alt="" width={logo.w} height={logo.h} />
           </span>
         ) : (
           <span className="hp-ava" aria-hidden="true">
@@ -121,8 +120,7 @@ export function HeroProof() {
       ) : (
         // no figure for this client: show who they are instead of a curve
         <div key={i} className="hp-pic" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          {photo ? <img className="hp-pic-photo" src={photo} alt="" width={240} height={240} /> : logo ? <img className="hp-pic-logo" src={logo.src} alt="" width={logo.w} height={logo.h} /> : null}
+          {photo ? <Image loading="eager" className="hp-pic-photo" src={photo} alt="" width={240} height={240} /> : logo ? <Image loading="eager" className="hp-pic-logo" src={logo.src} alt="" width={logo.w} height={logo.h} /> : null}
         </div>
       )}
       <button type="button" className="hp-next" onClick={() => setI((n) => (n + 1) % HERO_PROOF.length)} data-event="Hero proof next">

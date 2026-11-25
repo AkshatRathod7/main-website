@@ -13,11 +13,9 @@
 }
 .lg-f{ stroke-width: 0; stroke-dasharray: 1; stroke-dashoffset: 0; }
 .lg-shine{ pointer-events: none; }
-.lg-live .lg-l{ animation: lg-rise 760ms cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(80ms + var(--i) * 55ms); }
-.lg-live .lg-f{
-  animation: lg-draw 900ms ease-out both, lg-fill 700ms ease-out both;
-  animation-delay: calc(80ms + var(--i) * 55ms), calc(520ms + var(--i) * 55ms);
-}
+/* The wordmark no longer draws itself in on load. It sits in the nav above the fold, and the draw animated
+   stroke-dashoffset, fill-opacity and stroke-width, none of which the compositor can run (Lighthouse counted
+   most of its 30 non-composited animations here). Hover still lifts the letters, using translate only. */
 .lg-spark{ transform-box: fill-box; transform-origin: center; transform: scale(0); animation: lg-spark 4.2s ease-in-out 1.8s infinite; }
 a:hover .lg-l, a:focus-visible .lg-l, .lg:hover .lg-l{ translate: 0 -12%; }
 a:hover .lg-sv, a:focus-visible .lg-sv, .lg:hover .lg-sv{ translate: 0 -24%; rotate: -7deg; }
@@ -34,8 +32,7 @@ a:hover .lg-sv, a:focus-visible .lg-sv, .lg:hover .lg-sv{ translate: 0 -24%; rot
 /* ───────── Hero ───────── */
 /* Flat brand coral (was an animated gradient; gradient text reads as AI-made). */
 .hero-grad{ color: #c0461f; }
-.hero-sub{ animation: hero-in 800ms var(--ease-out) 450ms both; }
-.hero-ctas{ animation: hero-in 800ms var(--ease-out) 600ms both; }
+/* .hero-sub and .hero-ctas no longer fade in on load: above-the-fold text is painted on the first frame. */
 @keyframes hero-in { from { opacity: 0; transform: translateY(var(--enter-y, 16px)); } }
 
 /* Story card: real client results, one at a time */
@@ -152,8 +149,8 @@ section[data-stage="scale"]{ background-color: var(--c-gold); }
 .pe-svg{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .pe-ring{ fill: none; stroke: var(--c-coral); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; opacity: 0; animation: pe-in 3.6s linear infinite; }
 @keyframes pe-in { 0% { transform: scale(3.2); opacity: 0; } 25% { opacity: .55; } 100% { transform: scale(1); opacity: 0; } }
-.pe-route{ fill: none; stroke: var(--line-strong); stroke-width: 1.5; stroke-dasharray: 3 6; animation: pe-flow 900ms linear infinite; }
-@keyframes pe-flow { to { stroke-dashoffset: -9; } }
+.pe-route{ fill: none; stroke: var(--line-strong); stroke-width: 1.5; stroke-dasharray: 3 6; animation: pe-flow 1.8s ease-in-out infinite; }
+@keyframes pe-flow { 0%, 100% { opacity: .45; } 50% { opacity: 1; } } /* opacity, not dash offset: compositor-only */
 .pe-p{ opacity: 0; }
 
 .pe-core{ transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 14px 24px rgb(255 112 92 / .45)); animation: pe-beat 1.4s ease-in-out infinite; }
@@ -314,9 +311,9 @@ section[data-stage="scale"]{ background-color: var(--c-gold); }
 .ff-gridline{stroke:rgba(247,244,238,.07);stroke-width:1;stroke-dasharray:2 6}
 .ff-lab{fill:rgba(247,244,238,.55);font:500 11px/1 var(--font-sans),sans-serif;letter-spacing:.12em;text-transform:uppercase}
 .ff-ghost{fill:none;stroke:rgba(247,244,238,.18);stroke-width:2;stroke-dasharray:3 5}
-.ff-line{fill:none;stroke:#f7f4ee;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:ff-draw .9s cubic-bezier(.3,.7,.2,1) forwards}
+.ff-line{fill:none;stroke:#f7f4ee;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;animation:ff-draw .9s cubic-bezier(.3,.7,.2,1) forwards}
 .ff[data-step="3"] .ff-line{stroke:#ff8a65;stroke-width:3.5}
-@keyframes ff-draw{to{stroke-dashoffset:0}}
+@keyframes ff-draw{to{opacity:1}}
 .ff-dot{fill:#e8593c;transform-box:fill-box;transform-origin:center;animation:ff-pop .5s .7s cubic-bezier(.2,1.6,.3,1) both}
 .ff-ring{fill:none;stroke:#e8593c;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ff-ring 2.2s 1s ease-out infinite;opacity:0}
 .ff[data-step="0"] .ff-dot{animation:ff-pop .5s .7s cubic-bezier(.2,1.6,.3,1) both,ff-snooze 3s 1.2s ease-in-out infinite}
@@ -353,7 +350,7 @@ section[data-stage="scale"]{ background-color: var(--c-gold); }
 .sa .dot,.sa .win{stroke:none}
 .sa .sa-t{stroke:none;font:600 11px/1 var(--font-sans),sans-serif;letter-spacing:.08em}
 .sa .grid{opacity:.25}
-.sa .d{stroke-dasharray:1;stroke-dashoffset:1}
+.sa .d{opacity:0}
 .sa .dash{stroke-dasharray:.012 .02}
 .sa .rise{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0)}
 .sa .pop{transform-box:fill-box;transform-origin:center;transform:scale(0)}
@@ -373,7 +370,7 @@ section[data-stage="scale"]{ background-color: var(--c-gold); }
 .sa .bob{animation:sa-bob 3.2s ease-in-out infinite}
 .sa .swimmer{offset-rotate:0deg;opacity:0}
 .sa[data-play] .swimmer{animation:sa-swim 6s cubic-bezier(.45,0,.55,1) 1.2s infinite}
-@keyframes sa-draw{to{stroke-dashoffset:0}}
+@keyframes sa-draw{to{opacity:1}} /* was a stroke-dashoffset draw; opacity runs on the compositor */
 @keyframes sa-rise{to{transform:scaleY(1)}}
 @keyframes sa-pop{to{transform:scale(1)}}
 @keyframes sa-fadein{to{opacity:1}}
@@ -507,3 +504,14 @@ html:has(.spy-mark) .spy-mark{ scroll-margin-top: 0; }
 /* paper cards on carbon keep readable ink (the insights lead card's standfirst was dark on dark) */
 [data-theme="dark"] .bg-paper .text-ink{ color: var(--c-cream); }
 [data-theme="dark"] .bg-paper .text-ink-muted{ color: var(--c-cream-muted); }
+
+/* Reduced motion: one-shot reveals stay (shortened, see globals.css). Loops that never stop are switched off. */
+@media (prefers-reduced-motion: reduce){
+  .lg-spark, .pe-ring, .pe-core, .pe-route,
+  .sa .breathe, .sa .wave, .sa .bob,
+  .sa[data-play] .swimmer, .sa[data-play] .win, .sa[data-play] .pulse{ animation: none; }
+  .pe-ring{ opacity: 0; }
+  .sa[data-play] .pulse{ transform: scale(1); }
+  .sa[data-play] .win{ opacity: .85; }
+  .lg-l{ transition: none; }
+}
