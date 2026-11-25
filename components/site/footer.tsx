@@ -37,9 +37,9 @@ const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 const ENTITY = process.env.NEXT_PUBLIC_LEGAL_ENTITY;
 // Same URLs as the Organization / Person sameAs (lib/site.ts), so profiles and schema always agree.
 const SOCIALS = [
-  { label: "Instagram", aria: "DreamSVin on Instagram", href: SOCIAL.instagram },
-  { label: "LinkedIn", aria: "DreamSVin on LinkedIn", href: SOCIAL.linkedin },
-  { label: "Isha on LinkedIn", aria: "Isha Vijay Ostwal on LinkedIn", href: FOUNDER_SOCIAL.linkedin },
+  { label: "Instagram", aria: "Instagram: DreamSVin", href: SOCIAL.instagram },
+  { label: "LinkedIn", aria: "LinkedIn: DreamSVin", href: SOCIAL.linkedin },
+  { label: "Isha on LinkedIn", aria: "Isha on LinkedIn: Isha Vijay Ostwal", href: FOUNDER_SOCIAL.linkedin },
 ];
 
 const linkCls =
@@ -94,8 +94,10 @@ export function Footer({ className }: { className?: string }) {
             <ul className="mt-2 flex flex-wrap gap-x-5">
               {SOCIALS.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.aria} (opens in a new tab)`} className={linkCls}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className={linkCls}>
                     {s.label}
+                    {/* the visible label starts the accessible name (WCAG 2.5.3); the rest is for screen readers */}
+                    <span className="sr-only">{s.aria.slice(s.label.length) || ""} (opens in a new tab)</span>
                   </a>
                 </li>
               ))}
