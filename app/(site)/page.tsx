@@ -105,6 +105,16 @@ export default async function HomePage() {
             intro="Pick an industry to see who we grew there, and what changed."
           />
           <OurWork />
+          <p className="mt-10 text-body-lg text-fg-muted">
+            Working with a college or a real estate business?{" "}
+            <Link href="/what-we-do/institutions" className="font-semibold text-fg underline decoration-line-strong underline-offset-[0.22em] hover:text-accent-text">
+              Institutions
+            </Link>{" "}
+            ·{" "}
+            <Link href="/what-we-do/real-estate" className="font-semibold text-fg underline decoration-line-strong underline-offset-[0.22em] hover:text-accent-text">
+              Real estate founders
+            </Link>
+          </p>
         </div>
       </section>
 

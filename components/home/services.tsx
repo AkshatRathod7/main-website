@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { Head } from "@/components/brand/sections";
+import { LANDING_LINKS } from "@/content/landing";
 import { SERVICES } from "@/content/services";
 import { STAGES } from "@/content/site";
 import { ServicesIndex, type ServiceItem } from "./services-index";
@@ -28,6 +30,21 @@ export function HomeServicesIndex() {
       <div className="container-ds">
         <Head id="services-h" kicker="Services" lines={["Five ways in."]} intro="Each service runs on the same 90-day rhythm, with the same team behind it." />
         <ServicesIndex items={items} />
+        {/* Plain links to the pages for specific situations, so every one is a click (and a crawl) from home. */}
+        <nav aria-label="More ways in" className="mt-10 border-t border-line pt-6">
+          <ul className="flex flex-wrap gap-x-8 gap-y-1">
+            {LANDING_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-sm text-body font-semibold text-fg underline decoration-line-strong underline-offset-[0.22em] hover:text-accent-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </section>
   );
