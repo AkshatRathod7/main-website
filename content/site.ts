@@ -14,6 +14,17 @@ export const PRIMARY_CTA = { href: "/contact", label: "Book a Free Consultation"
 
 /* ───────────────────────── Home ───────────────────────── */
 
+/** Search title and description for the home page. Title ≤ 60 characters, description ≤ 155. */
+export const HOME_SEO = {
+  title: "DreamSVin | Growth Partner for Founder-Led Business in India",
+  description:
+    "90-day Growth Sprints for founder-led businesses and institutions in Mumbai, Pune and across India. We plan with you and execute. Book a free consultation.",
+} as const;
+
+/** The category in plain words, said once near the H1 so neither people nor search engines file us as an agency. */
+export const POSITIONING =
+  "Growth acceleration partner for founder-led businesses and institutions in India. Not a social media agency.";
+
 export const HERO = {
   eyebrow: "Build · Grow · Scale",
   lines: ["Your Business Architects.", "Your Growth Partners."],

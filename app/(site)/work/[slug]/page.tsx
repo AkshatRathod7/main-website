@@ -11,6 +11,9 @@ import { CaseCard, FinalCta, Kicker } from "@/components/brand/sections";
 import { CASES, caseBySlug, showQuote } from "@/content/cases";
 import { PRIMARY_CTA } from "@/content/site";
 
+/** Descriptions stay within the 155 characters search results show. */
+const clip = (t: string, n = 155) => (t.length <= n ? t : `${t.slice(0, t.lastIndexOf(" ", n - 1))}…`);
+
 export function generateStaticParams() {
   return CASES.map((c) => ({ slug: c.slug }));
 }
@@ -19,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = caseBySlug((await params).slug);
   if (!c) return {};
   return pageMetadata({
-    ownImage: true, title: `${c.client}: ${c.line.replace(/\.$/, "")}`, description: c.challenge, path: `/work/${c.slug}`, type: "article" });
+    ownImage: true, title: `${c.client} Case Study: ${c.focus}`, description: clip(`${c.line} ${c.mandate}`), path: `/work/${c.slug}`, type: "article" });
 }
 
 export default async function CasePage({ params }: { params: Promise<{ slug: string }> }) {

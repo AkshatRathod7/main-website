@@ -11,7 +11,7 @@ export const SITE = SITE_URL;
 export const SITE_NAME = "DreamSVin";
 export const TAGLINE = "Your Business Architects. Your Growth Partners.";
 export const DEFAULT_DESCRIPTION =
-  "We find what's holding your business back, build a focused 90-day plan, and help you execute it. Business architects and growth partners for startups, established businesses and institutions.";
+  "Growth acceleration partner for founder-led businesses and institutions in India. We find what's holding the business back, build a focused 90-day plan, and help execute it.";
 
 const ORG_ID = `${SITE}/#organization`;
 const SERVICE_ID = `${SITE}/#professional-service`;

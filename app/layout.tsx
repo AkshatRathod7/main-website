@@ -4,6 +4,7 @@ import { ToastProvider } from "@/components/ui/toast";
 import { Analytics } from "@/components/site/analytics";
 import { BrandDefs } from "@/components/brand/icons";
 import { DEFAULT_DESCRIPTION, SITE, SITE_NAME } from "@/lib/seo";
+import { HOME_SEO } from "@/content/site";
 import "./globals.css";
 
 /* Fonts. One family: Host Grotesk (Element Type, OFL, variable 300-800), for headings at a medium weight and
@@ -22,7 +23,7 @@ const host = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: { default: `${SITE_NAME}: Your Business Architects. Your Growth Partners.`, template: `%s - ${SITE_NAME}` },
+  title: { default: HOME_SEO.title, template: `%s - ${SITE_NAME}` },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   openGraph: { siteName: SITE_NAME, locale: "en_IN", type: "website" },

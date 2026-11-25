@@ -17,6 +17,9 @@ export type Service = {
   get: string[];
   sprint: [string, string, string, string]; // what each 90-day phase looks like for this service
   related: string; // case slug
+  /** Search title (the layout adds " - DreamSVin"; keep ≤ 48 characters) and description (≤ 155). */
+  seoTitle: string;
+  seoDescription: string;
 };
 
 export const SERVICES: Service[] = [
@@ -36,6 +39,8 @@ export const SERVICES: Service[] = [
       "Review what the market repeated back, tighten, and plan the next stage.",
     ],
     related: "contiq",
+    seoTitle: "Business Strategy and Positioning for Founders",
+    seoDescription: "Clear positioning, offers and pricing for founder-led businesses in India, delivered as a 90-day Growth Sprint: diagnose, plan, execute, optimise.",
   },
   {
     slug: "brand-identity-and-websites",
@@ -53,6 +58,8 @@ export const SERVICES: Service[] = [
       "Launch, roll out across touchpoints, and review what's working.",
     ],
     related: "snjb",
+    seoTitle: "Brand Identity and Website Design, India",
+    seoDescription: "Brand identity, messaging and websites for colleges, institutions and founder-led firms in India. Built in a 90-day sprint, from audit to launch.",
   },
   {
     slug: "content-and-personal-branding",
@@ -70,6 +77,8 @@ export const SERVICES: Service[] = [
       "Review what moved, double down, and plan the next quarter.",
     ],
     related: "nagarsheth-group",
+    seoTitle: "Founder Content and Personal Branding",
+    seoDescription: "A content system built around a founder's expertise and voice: strategy, production and a posting rhythm your week can sustain, run as a 90-day sprint.",
   },
   {
     slug: "community-and-collaborations",
@@ -87,6 +96,8 @@ export const SERVICES: Service[] = [
       "Review reach and response, and plan the next season.",
     ],
     related: "ekoham",
+    seoTitle: "Community Building and Brand Collaborations",
+    seoDescription: "Events, partnerships and creator collaborations that bring the right audience to your business. Part of the CCC growth engine, run in 90-day sprints.",
   },
   {
     slug: "growth-systems-and-scale",
@@ -104,6 +115,8 @@ export const SERVICES: Service[] = [
       "Review the numbers, tighten the system, and plan the next market.",
     ],
     related: "strongher-after-40",
+    seoTitle: "Growth Systems, Funnels and Automation",
+    seoDescription: "Funnels, automation and SOPs so growth stops depending on the founder doing everything. Built and run with your team in a 90-day Growth Sprint.",
   },
 ];
 
